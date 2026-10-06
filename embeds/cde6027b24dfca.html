@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Rally Championship Historical - Driver Pace Ranking</title>
+    <style>
+        @font-face {
+            font-family: 'WRC Clean';
+            src: url('https://fonts.cdnfonts.com/css/wrc-clean') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'WRC Clean Bold';
+            src: url('https://fonts.cdnfonts.com/css/wrc-clean') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+        }
+        body {
+            font-family: 'WRC Clean', 'Open Sans', Arial, sans-serif;
+            text-align: center;
+            background: white;
+            color: black;
+            margin: 0;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        h1 {
+            font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 0 10px 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 10px;
+            border-radius: 8px 8px 0 0;
+        }
+        .subtitle {
+            font-size: 12px;
+            font-style: italic;
+            color: #666;
+            margin: 5px 0 15px 0;
+        }
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            font-size: 10px;
+            min-width: 1200px;
+        }
+        th {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 6px 2px;
+            font-size: 9px;
+            border: 1px solid #16213e;
+            text-align: center;
+            white-space: nowrap;
+        }
+        td {
+            padding: 6px 2px;
+            text-align: center;
+            color: #333;
+            font-family: 'WRC Clean', 'Open Sans', Arial, sans-serif;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+            font-size: 9px;
+        }
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        img.flag {
+            width: 18px;
+            height: 12px;
+            vertical-align: middle;
+            margin-right: 5px;
+            border-radius: 1px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .ranking-cell {
+            font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+            font-weight: bold;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        .driver-cell {
+            font-weight: 500;
+            text-align: left;
+            padding-left: 8px;
+        }
+        .car-cell {
+            font-size: 10px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+        .pace-cell {
+            font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+            font-weight: bold;
+            color: #0066cc;
+            text-align: center;
+        }
+        .average-cell {
+            font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+            font-weight: bold;
+            color: #0066cc;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .percent-cell {
+            font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        /* Car manufacturer colors */
+        .citroen { background-color: #FFD700; color: #000; }
+        .ford { background-color: #0066CC; }
+        .peugeot { background-color: #FF6600; }
+        .subaru { background-color: #003399; }
+        .skoda { background-color: #00AA00; }
+        .mitsubishi { background-color: #CC0000; }
+
+        /* Empty cells */
+        .empty-cell {
+            color: #ccc;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h1>World Rally Championship - Historical Driver Pace Ranking</h1>
+    <div class="subtitle">~2005 World Rally Championship Season</div>
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 2.5%;">Ranking</th>
+                    <th style="width: 12%;">Driver</th>
+                    <th style="width: 11%;">Car</th>
+                    <th style="width: 3%;" title="Monte Carlo">🇲🇨</th>
+                    <th style="width: 3%;" title="Sweden">🇸🇪</th>
+                    <th style="width: 3%;" title="Mexico">🇲🇽</th>
+                    <th style="width: 3%;" title="Catalonia">🇪🇸</th>
+                    <th style="width: 3%;" title="Corsica">🇫🇷</th>
+                    <th style="width: 3%;" title="Argentina">🇦🇷</th>
+                    <th style="width: 3%;" title="Sardinia">🇮🇹</th>
+                    <th style="width: 3%;" title="Acropolis">🇬🇷</th>
+                    <th style="width: 3%;" title="Germany">🇩🇪</th>
+                    <th style="width: 3%;" title="Finland">🇫🇮</th>
+                    <th style="width: 3%;" title="Japan">🇯🇵</th>
+                    <th style="width: 3%;" title="Cyprus">🇨🇾</th>
+                    <th style="width: 3%;" title="Turkey">🇹🇷</th>
+                    <th style="width: 3%;" title="Australia">🇦🇺</th>
+                    <th style="width: 3%;" title="New Zealand">🇳🇿</th>
+                    <th style="width: 3%;" title="Wales">🏴󠁧󠁢󠁷󠁬󠁳󠁿</th>
+                    <th style="width: 5.5%;">Average (s/km)</th>
+                    <th style="width: 5.5%;">% Stages</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="ranking-cell">1</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag" />Sebastien Loeb</td>
+                    <td class="car-cell citroen">Citroën Xsara WRC</td>
+                    <td class="pace-cell">0.14</td>
+                    <td class="pace-cell">0.14</td>
+                    <td class="pace-cell">0.12</td>
+                    <td class="pace-cell">0.18</td>
+                    <td class="pace-cell">0.07</td>
+                    <td class="pace-cell">0.20</td>
+                    <td class="pace-cell">0.18</td>
+                    <td class="pace-cell">0.38</td>
+                    <td class="pace-cell">0.17</td>
+                    <td class="pace-cell">0.16</td>
+                    <td class="pace-cell">0.15</td>
+                    <td class="pace-cell">0.10</td>
+                    <td class="pace-cell">0.99</td>
+                    <td class="pace-cell">0.17</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">0.23</td>
+                    <td class="percent-cell">87.5%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">2</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Marcus Grönholm</td>
+                    <td class="car-cell ford">Ford Focus WRC</td>
+                    <td class="pace-cell">0.67</td>
+                    <td class="pace-cell">0.05</td>
+                    <td class="pace-cell">0.52</td>
+                    <td class="pace-cell">0.02</td>
+                    <td class="pace-cell">0.15</td>
+                    <td class="pace-cell">0.13</td>
+                    <td class="pace-cell">0.03</td>
+                    <td class="pace-cell">0.18</td>
+                    <td class="pace-cell">0.52</td>
+                    <td class="pace-cell">0.05</td>
+                    <td class="pace-cell">0.17</td>
+                    <td class="pace-cell">0.17</td>
+                    <td class="pace-cell">0.21</td>
+                    <td class="pace-cell">0.16</td>
+                    <td class="pace-cell">0.11</td>
+                    <td class="pace-cell">0.17</td>
+                    <td class="average-cell">0.21</td>
+                    <td class="percent-cell">100.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">3</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Mikko Hirvonen</td>
+                    <td class="car-cell ford">Ford Focus WRC</td>
+                    <td class="pace-cell">1.61</td>
+                    <td class="pace-cell">0.47</td>
+                    <td class="pace-cell">0.53</td>
+                    <td class="pace-cell">0.24</td>
+                    <td class="pace-cell">0.41</td>
+                    <td class="pace-cell">0.54</td>
+                    <td class="pace-cell">0.55</td>
+                    <td class="pace-cell">0.79</td>
+                    <td class="pace-cell">0.65</td>
+                    <td class="pace-cell">0.33</td>
+                    <td class="pace-cell">0.63</td>
+                    <td class="pace-cell">1.09</td>
+                    <td class="pace-cell">0.62</td>
+                    <td class="pace-cell">0.16</td>
+                    <td class="pace-cell">0.27</td>
+                    <td class="pace-cell">0.27</td>
+                    <td class="average-cell">0.57</td>
+                    <td class="percent-cell">100.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">4</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/at.png" alt="Austria" class="flag" />Manfred Stohl</td>
+                    <td class="car-cell peugeot">Peugeot 307 WRC</td>
+                    <td class="pace-cell">1.06</td>
+                    <td class="pace-cell">0.95</td>
+                    <td class="pace-cell">0.89</td>
+                    <td class="pace-cell">1.18</td>
+                    <td class="pace-cell">0.92</td>
+                    <td class="pace-cell">0.49</td>
+                    <td class="pace-cell">1.40</td>
+                    <td class="pace-cell">1.01</td>
+                    <td class="pace-cell">0.88</td>
+                    <td class="pace-cell">1.30</td>
+                    <td class="pace-cell">1.40</td>
+                    <td class="pace-cell">1.35</td>
+                    <td class="pace-cell">1.07</td>
+                    <td class="pace-cell">0.85</td>
+                    <td class="pace-cell">0.56</td>
+                    <td class="pace-cell">0.44</td>
+                    <td class="average-cell">0.98</td>
+                    <td class="percent-cell">100.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">5</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/es.png" alt="Spain" class="flag" />Dani Sordo</td>
+                    <td class="car-cell citroen">Citroën Xsara WRC</td>
+                    <td class="pace-cell">1.79</td>
+                    <td class="pace-cell">1.46</td>
+                    <td class="pace-cell">1.03</td>
+                    <td class="pace-cell">0.32</td>
+                    <td class="pace-cell">0.24</td>
+                    <td class="pace-cell">1.22</td>
+                    <td class="pace-cell">0.79</td>
+                    <td class="pace-cell">1.01</td>
+                    <td class="pace-cell">0.22</td>
+                    <td class="pace-cell">1.01</td>
+                    <td class="pace-cell">1.42</td>
+                    <td class="pace-cell">1.86</td>
+                    <td class="pace-cell">0.91</td>
+                    <td class="pace-cell">1.20</td>
+                    <td class="pace-cell">0.68</td>
+                    <td class="pace-cell">0.73</td>
+                    <td class="average-cell">0.99</td>
+                    <td class="percent-cell">100.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">6</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/no.png" alt="Norway" class="flag" />Petter Solberg</td>
+                    <td class="car-cell subaru">Subaru Impreza WRC</td>
+                    <td class="pace-cell">1.17</td>
+                    <td class="pace-cell">0.60</td>
+                    <td class="pace-cell">0.25</td>
+                    <td class="pace-cell">0.76</td>
+                    <td class="pace-cell">1.04</td>
+                    <td class="pace-cell">0.25</td>
+                    <td class="pace-cell">0.55</td>
+                    <td class="pace-cell">0.28</td>
+                    <td class="pace-cell">1.08</td>
+                    <td class="pace-cell">0.41</td>
+                    <td class="pace-cell">1.19</td>
+                    <td class="pace-cell">1.18</td>
+                    <td class="pace-cell">0.15</td>
+                    <td class="pace-cell">0.27</td>
+                    <td class="pace-cell">0.78</td>
+                    <td class="pace-cell">0.19</td>
+                    <td class="average-cell">0.63</td>
+                    <td class="percent-cell">100.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">7</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/es.png" alt="Spain" class="flag" />Xevi Pons</td>
+                    <td class="car-cell citroen">Citroën Xsara WRC</td>
+                    <td class="pace-cell">2.11</td>
+                    <td class="pace-cell">1.56</td>
+                    <td class="pace-cell">0.99</td>
+                    <td class="pace-cell">0.54</td>
+                    <td class="pace-cell">0.61</td>
+                    <td class="pace-cell">0.92</td>
+                    <td class="pace-cell">1.13</td>
+                    <td class="pace-cell">1.58</td>
+                    <td class="pace-cell">1.24</td>
+                    <td class="pace-cell">1.84</td>
+                    <td class="pace-cell">1.61</td>
+                    <td class="pace-cell">0.85</td>
+                    <td class="pace-cell">0.98</td>
+                    <td class="pace-cell">0.51</td>
+                    <td class="pace-cell">0.63</td>
+                    <td class="pace-cell">0.81</td>
+                    <td class="average-cell">1.12</td>
+                    <td class="percent-cell">100.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">8</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/no.png" alt="Norway" class="flag" />Henning Solberg</td>
+                    <td class="car-cell peugeot">Peugeot 307 WRC</td>
+                    <td class="pace-cell">2.39</td>
+                    <td class="pace-cell">0.82</td>
+                    <td class="pace-cell">1.69</td>
+                    <td class="pace-cell">0.83</td>
+                    <td class="pace-cell">0.94</td>
+                    <td class="pace-cell">0.95</td>
+                    <td class="pace-cell">0.73</td>
+                    <td class="pace-cell">1.87</td>
+                    <td class="pace-cell">0.79</td>
+                    <td class="pace-cell">1.63</td>
+                    <td class="pace-cell">1.15</td>
+                    <td class="pace-cell">0.82</td>
+                    <td class="pace-cell">0.78</td>
+                    <td class="pace-cell">1.15</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">1.18</td>
+                    <td class="percent-cell">87.5%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">9</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Toni Gardemeister</td>
+                    <td class="car-cell peugeot">Peugeot 307 WRC</td>
+                    <td class="empty-cell">—</td>
+                    <td class="pace-cell">0.91</td>
+                    <td class="pace-cell">0.54</td>
+                    <td class="pace-cell">1.30</td>
+                    <td class="pace-cell">0.93</td>
+                    <td class="pace-cell">1.00</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">0.94</td>
+                    <td class="percent-cell">31.25%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">10</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/au.png" alt="Australia" class="flag" />Chris Atkinson</td>
+                    <td class="car-cell subaru">Subaru Impreza WRC</td>
+                    <td class="pace-cell">1.79</td>
+                    <td class="pace-cell">0.93</td>
+                    <td class="pace-cell">0.92</td>
+                    <td class="pace-cell">0.88</td>
+                    <td class="pace-cell">1.38</td>
+                    <td class="pace-cell">0.25</td>
+                    <td class="pace-cell">0.55</td>
+                    <td class="pace-cell">0.28</td>
+                    <td class="pace-cell">0.79</td>
+                    <td class="pace-cell">0.41</td>
+                    <td class="pace-cell">1.02</td>
+                    <td class="pace-cell">1.59</td>
+                    <td class="pace-cell">0.86</td>
+                    <td class="pace-cell">0.58</td>
+                    <td class="pace-cell">0.58</td>
+                    <td class="pace-cell">0.60</td>
+                    <td class="average-cell">0.84</td>
+                    <td class="percent-cell">100.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">11</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/it.png" alt="Italy" class="flag" />Gigi Galli</td>
+                    <td class="car-cell peugeot">Peugeot 307 WRC</td>
+                    <td class="pace-cell">1.43</td>
+                    <td class="pace-cell">0.61</td>
+                    <td class="pace-cell">1.03</td>
+                    <td class="pace-cell">0.78</td>
+                    <td class="pace-cell">0.85</td>
+                    <td class="pace-cell">0.96</td>
+                    <td class="pace-cell">0.82</td>
+                    <td class="pace-cell">0.85</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">0.92</td>
+                    <td class="percent-cell">50.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">12</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag" />Alexandre Bengué</td>
+                    <td class="car-cell peugeot">Peugeot 307 WRC</td>
+                    <td class="pace-cell">0.54</td>
+                    <td class="empty-cell">—</td>
+                    <td class="pace-cell">1.00</td>
+                    <td class="pace-cell">0.54</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">0.69</td>
+                    <td class="percent-cell">18.75%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">13</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Jari-Matti Latvala</td>
+                    <td class="car-cell ford">Ford Focus WRC</td>
+                    <td class="pace-cell">0.90</td>
+                    <td class="pace-cell">0.86</td>
+                    <td class="pace-cell">1.13</td>
+                    <td class="pace-cell">1.90</td>
+                    <td class="pace-cell">0.61</td>
+                    <td class="pace-cell">0.74</td>
+                    <td class="pace-cell">1.15</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">1.04</td>
+                    <td class="percent-cell">43.75%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">14</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Kosti Katajamäki</td>
+                    <td class="car-cell ford">Ford Focus WRC</td>
+                    <td class="pace-cell">1.22</td>
+                    <td class="pace-cell">1.79</td>
+                    <td class="pace-cell">1.39</td>
+                    <td class="pace-cell">0.92</td>
+                    <td class="pace-cell">0.90</td>
+                    <td class="pace-cell">0.77</td>
+                    <td class="pace-cell">0.93</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">1.13</td>
+                    <td class="percent-cell">43.75%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">15</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/cz.png" alt="Czech Republic" class="flag" />Jan Kopecký</td>
+                    <td class="car-cell skoda">Skoda Fabia WRC</td>
+                    <td class="pace-cell">2.97</td>
+                    <td class="pace-cell">2.20</td>
+                    <td class="pace-cell">0.70</td>
+                    <td class="pace-cell">1.11</td>
+                    <td class="pace-cell">1.84</td>
+                    <td class="pace-cell">1.44</td>
+                    <td class="pace-cell">0.81</td>
+                    <td class="pace-cell">1.80</td>
+                    <td class="pace-cell">1.78</td>
+                    <td class="pace-cell">1.40</td>
+                    <td class="pace-cell">0.83</td>
+                    <td class="pace-cell">1.62</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">1.54</td>
+                    <td class="percent-cell">75.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">16</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag" />Stéphane Sarrazin</td>
+                    <td class="car-cell subaru">Subaru Impreza WRC</td>
+                    <td class="pace-cell">1.48</td>
+                    <td class="pace-cell">0.98</td>
+                    <td class="pace-cell">0.98</td>
+                    <td class="pace-cell">1.09</td>
+                    <td class="pace-cell">0.79</td>
+                    <td class="pace-cell">1.15</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">1.08</td>
+                    <td class="percent-cell">37.5%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">17</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/lu.png" alt="Luxembourg" class="flag" />François Duval</td>
+                    <td class="car-cell skoda">Skoda Fabia WRC</td>
+                    <td class="pace-cell">0.53</td>
+                    <td class="pace-cell">0.73</td>
+                    <td class="pace-cell">1.18</td>
+                    <td class="pace-cell">1.75</td>
+                    <td class="pace-cell">0.93</td>
+                    <td class="pace-cell">0.68</td>
+                    <td class="pace-cell">1.17</td>
+                    <td class="pace-cell">0.81</td>
+                    <td class="pace-cell">0.99</td>
+                    <td class="pace-cell">1.15</td>
+                    <td class="pace-cell">0.99</td>
+                    <td class="pace-cell">0.81</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">0.98</td>
+                    <td class="percent-cell">75.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">18</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/de.png" alt="Germany" class="flag" />Andreas Aigner</td>
+                    <td class="car-cell skoda">Skoda Fabia WRC</td>
+                    <td class="pace-cell">3.89</td>
+                    <td class="pace-cell">2.76</td>
+                    <td class="pace-cell">1.58</td>
+                    <td class="pace-cell">1.81</td>
+                    <td class="pace-cell">2.96</td>
+                    <td class="pace-cell">2.53</td>
+                    <td class="pace-cell">1.07</td>
+                    <td class="pace-cell">1.82</td>
+                    <td class="pace-cell">1.51</td>
+                    <td class="pace-cell">1.81</td>
+                    <td class="pace-cell">0.67</td>
+                    <td class="pace-cell">2.45</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">2.07</td>
+                    <td class="percent-cell">75.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">19</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Harri Rovanpera</td>
+                    <td class="car-cell skoda">Skoda Fabia WRC</td>
+                    <td class="pace-cell">2.31</td>
+                    <td class="pace-cell">2.66</td>
+                    <td class="pace-cell">2.52</td>
+                    <td class="pace-cell">3.53</td>
+                    <td class="pace-cell">1.64</td>
+                    <td class="pace-cell">1.47</td>
+                    <td class="pace-cell">0.63</td>
+                    <td class="pace-cell">1.97</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">2.09</td>
+                    <td class="percent-cell">50.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">20</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag" />Gilles Panizzi</td>
+                    <td class="car-cell skoda">Skoda Fabia WRC</td>
+                    <td class="pace-cell">2.02</td>
+                    <td class="pace-cell">0.83</td>
+                    <td class="pace-cell">0.84</td>
+                    <td class="pace-cell">1.40</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">1.27</td>
+                    <td class="percent-cell">25.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">21</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/se.png" alt="Sweden" class="flag" />Daniel Carlsson</td>
+                    <td class="car-cell mitsubishi">Mitsubishi Lancer WRC</td>
+                    <td class="pace-cell">0.59</td>
+                    <td class="pace-cell">1.20</td>
+                    <td class="pace-cell">0.65</td>
+                    <td class="pace-cell">0.75</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">0.80</td>
+                    <td class="percent-cell">25.0%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">22</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/gb-sct.png" alt="Scotland" class="flag" />Colin McRae</td>
+                    <td class="car-cell citroen">Citroën Xsara WRC</td>
+                    <td class="pace-cell">1.07</td>
+                    <td class="pace-cell">0.88</td>
+                    <td class="pace-cell">1.07</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">1.01</td>
+                    <td class="percent-cell">18.75%</td>
+                </tr>
+                <tr>
+                    <td class="ranking-cell">23</td>
+                    <td class="driver-cell"><img src="https://flagcdn.com/w20/jp.png" alt="Japan" class="flag" />Toshi Arai</td>
+                    <td class="car-cell subaru">Subaru Impreza WRC</td>
+                    <td class="pace-cell">1.67</td>
+                    <td class="pace-cell">0.96</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="empty-cell">—</td>
+                    <td class="average-cell">1.32</td>
+                    <td class="percent-cell">12.5%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

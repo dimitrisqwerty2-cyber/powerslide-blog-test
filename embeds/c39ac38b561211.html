@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+    @font-face {
+        font-family: 'WRC Clean';
+        src: url('https://fonts.cdnfonts.com/css/wrc-clean') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'WRC Clean Bold';
+        src: url('https://fonts.cdnfonts.com/css/wrc-clean') format('woff2');
+        font-weight: bold;
+        font-style: normal;
+    }
+    body {
+        font-family: 'WRC Clean', 'Open Sans', Arial, sans-serif;
+        text-align: center;
+        background: white;
+        color: black;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0 0 20px 0;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        background: linear-gradient(135deg, #19ae65 0%, #009696 100%);
+        padding: 15px;
+        border-radius: 8px 8px 0 0;
+    }
+    table {
+        width: 95%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 0 0 8px 8px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        font-size: 12px;
+    }
+    th {
+        background: linear-gradient(135deg, #19ae65 0%, #009696 100%);
+        color: white;
+        font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 10px 5px;
+        font-size: 11px;
+        border: 1px solid #009696;
+        text-align: center;
+    }
+    td {
+        padding: 8px 5px;
+        text-align: center;
+        color: #333;
+        font-family: 'WRC Clean', 'Open Sans', Arial, sans-serif;
+        border: 1px solid #ddd;
+        vertical-align: middle;
+        font-size: 11px;
+    }
+    tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    img.flag {
+        width: 18px;
+        height: 12px;
+        vertical-align: middle;
+        margin-right: 5px;
+        border-radius: 1px;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    .ranking-cell {
+        font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+        font-weight: bold;
+        background-color: #f0f0f0;
+        text-align: center;
+    }
+    .driver-cell {
+        font-weight: 500;
+        text-align: left;
+        padding-left: 8px;
+    }
+    .tyre-cell {
+        font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+    }
+    .car-cell {
+        font-size: 10px;
+        color: white;
+        text-align: center;
+    }
+    .deficit-cell {
+        font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+        font-weight: bold;
+        color: #0066cc;
+        text-align: center;
+    }
+    .stages-cell {
+        font-size: 10px;
+        color: #666;
+        text-align: center;
+    }
+    .average-cell {
+        font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+        font-weight: bold;
+        color: #0066cc;
+        text-align: center;
+    }
+    /* Tyre manufacturer colors - corrected */
+    .M { background-color: #0066FF; } /* Michelin - Blue */
+    .P { background-color: #FFCC00; color: #333; } /* Pirelli - Yellow */
+    .H { background-color: #FFCC00; color: #333; } /* Hankook - Yellow */
+    .MRF { background-color: #FF0000; } /* MRF - Red */
+    
+    /* Car manufacturer colors */
+    .skoda { background-color: #00AA44; color: white; }
+    .ford { background-color: #0066CC; color: white; }
+    .citroen { background-color: #CC0000; color: white; }
+    .toyota { background-color: #FF0000; color: white; }
+    .hyundai { background-color: #003366; color: white; }
+    .yaris-i20 { background-color: #FF8800; color: white; }
+    
+    th.ranking-col { width: 4%; }
+    th.driver-col { width: 14%; }
+    th.tyre-col { width: 4%; }
+    th.car-col { width: 14%; }
+    th.rally-col { width: 6%; }
+    th.stages-col { width: 7%; }
+    th.average-col { width: 7%; }
+</style>
+<title>European Rally Championship 2025 - Driver Pace Ranking</title>
+</head>
+<body>
+<h1>European Rally Championship 2025 - Driver Pace Ranking</h1>
+<table>
+    <tr>
+        <th class="ranking-col">Ranking</th>
+        <th class="driver-col">Driver</th>
+        <th class="tyre-col">Tyre</th>
+        <th class="car-col">Car</th>
+        <th class="rally-col">Spain</th>
+        <th class="rally-col">Hungary</th>
+        <th class="rally-col">Sweden</th>
+        <th class="rally-col">Poland</th>
+        <th class="rally-col">Roma</th>
+        <th class="rally-col">Zlin</th>
+        <th class="rally-col">Wales</th>
+        <th class="rally-col">Croatia</th>
+        <th class="stages-col">% Stages</th>
+        <th class="average-col">Average</th>
+    </tr>
+    <tr>
+        <td class="ranking-cell">1</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/pl.png" alt="Poland" class="flag" />Miko Marczyk</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.66</td>
+        <td class="deficit-cell">0.39</td>
+        <td class="deficit-cell">0.51</td>
+        <td class="deficit-cell">0.41</td>
+        <td class="deficit-cell">0.16</td>
+        <td class="deficit-cell">0.48</td>
+        <td class="deficit-cell">0.38</td>
+        <td class="deficit-cell">0.58</td>
+        <td class="stages-cell">0.97</td>
+        <td class="average-cell">0.44</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">2</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/it.png" alt="Italy" class="flag" />Andrea Mabellini</td>
+        <td class="tyre-cell P">P</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.54</td>
+        <td class="deficit-cell">0.08</td>
+        <td class="deficit-cell">0.25</td>
+        <td class="deficit-cell">0.88</td>
+        <td class="deficit-cell">0.15</td>
+        <td class="deficit-cell">0.22</td>
+        <td class="deficit-cell">0.47</td>
+        <td class="deficit-cell">0.57</td>
+        <td class="stages-cell">0.88</td>
+        <td class="average-cell">0.37</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">3</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/ie.png" alt="Northern Ireland" class="flag" />Jon Armstrong</td>
+        <td class="tyre-cell P">P</td>
+        <td class="car-cell ford">Ford Fiesta Rally2</td>
+        <td class="deficit-cell">0.37</td>
+        <td class="deficit-cell">0.15</td>
+        <td class="deficit-cell">0.27</td>
+        <td class="deficit-cell">0.41</td>
+        <td class="deficit-cell">0.59</td>
+        <td class="deficit-cell">0.20</td>
+        <td class="deficit-cell">0.15</td>
+        <td class="deficit-cell">0.08</td>
+        <td class="stages-cell">0.87</td>
+        <td class="average-cell">0.28</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">4</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/no.png" alt="Norway" class="flag" />Mads Ostberg</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell citroen">Citroen C3 Rally2</td>
+        <td class="deficit-cell">0.49</td>
+        <td class="deficit-cell">0.42</td>
+        <td class="deficit-cell">0.50</td>
+        <td class="deficit-cell">0.63</td>
+        <td class="deficit-cell">0.33</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.40</td>
+        <td class="stages-cell">0.91</td>
+        <td class="average-cell">0.47</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">5</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/se.png" alt="Sweden" class="flag" />Isak Reiersen</td>
+        <td class="tyre-cell H">H</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.85</td>
+        <td class="deficit-cell">0.19</td>
+        <td class="deficit-cell">0.53</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.93</td>
+        <td class="average-cell">0.48</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">6</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Roope Korhonen</td>
+        <td class="tyre-cell MRF">MRF</td>
+        <td class="car-cell toyota">Toyota Yaris Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.17</td>
+        <td class="deficit-cell">0.17</td>
+        <td class="deficit-cell">0.29</td>
+        <td class="deficit-cell">1.19</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.86</td>
+        <td class="average-cell">0.42</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">7</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/se.png" alt="Sweden" class="flag" />Mille Johansson</td>
+        <td class="tyre-cell H">H</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.83</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.42</td>
+        <td class="deficit-cell">0.99</td>
+        <td class="deficit-cell">1.34</td>
+        <td class="deficit-cell">1.04</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.44</td>
+        <td class="stages-cell">0.9</td>
+        <td class="average-cell">0.87</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">8</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/lv.png" alt="Latvia" class="flag" />Martins Sesks</td>
+        <td class="tyre-cell MRF">MRF</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.02</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.93</td>
+        <td class="average-cell">0.02</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">9</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/bg.png" alt="Bulgaria" class="flag" />Nikolay Gryazin</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.07</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">1</td>
+        <td class="average-cell">0.07</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">10</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/cz.png" alt="Czech Republic" class="flag" />Jan Kopecky</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.15</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">1</td>
+        <td class="average-cell">0.15</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">11</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/no.png" alt="Norway" class="flag" />Eyvid Brynildsen</td>
+        <td class="tyre-cell P">P</td>
+        <td class="car-cell toyota">Toyota Yaris Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.14</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">1</td>
+        <td class="average-cell">0.14</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">12</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/at.png" alt="Austria" class="flag" />Simon Wagner</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell hyundai">Hyundai i20 Rally2</td>
+        <td class="deficit-cell">1.08</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.57</td>
+        <td class="deficit-cell">0.23</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.78</td>
+        <td class="stages-cell">0.55</td>
+        <td class="average-cell">0.65</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">13</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/it.png" alt="Italy" class="flag" />Giandomenico Basso</td>
+        <td class="tyre-cell P">P</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.13</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">1</td>
+        <td class="average-cell">0.13</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">14</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/ee.png" alt="Estonia" class="flag" />Romet Jurgenson</td>
+        <td class="tyre-cell P">P</td>
+        <td class="car-cell ford">Ford Fiesta Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.30</td>
+        <td class="deficit-cell">0.54</td>
+        <td class="stages-cell">0.91</td>
+        <td class="average-cell">0.40</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">15</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/pl.png" alt="Poland" class="flag" />Jakub Matulka</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">1.50</td>
+        <td class="deficit-cell">0.95</td>
+        <td class="deficit-cell">1.12</td>
+        <td class="deficit-cell">1.18</td>
+        <td class="deficit-cell">0.40</td>
+        <td class="deficit-cell">0.82</td>
+        <td class="deficit-cell">0.64</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.73</td>
+        <td class="average-cell">1.05</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">16</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/ro.png" alt="Romania" class="flag" />Simone Tempestini</td>
+        <td class="tyre-cell MRF">MRF</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.94</td>
+        <td class="deficit-cell">0.36</td>
+        <td class="deficit-cell">0.77</td>
+        <td class="deficit-cell">0.78</td>
+        <td class="deficit-cell">0.48</td>
+        <td class="deficit-cell">0.76</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.62</td>
+        <td class="stages-cell">0.67</td>
+        <td class="average-cell">0.69</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">17</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag" />Yoann Bonato</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell citroen">Citroen C3 Rally2</td>
+        <td class="deficit-cell">0.29</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">1</td>
+        <td class="average-cell">0.29</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">18</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/it.png" alt="Italy" class="flag" />Roberto Dapra</td>
+        <td class="tyre-cell P">P</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.13</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.92</td>
+        <td class="average-cell">0.13</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">19</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/es.png" alt="Spain" class="flag" />JA Suarez</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.32</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.92</td>
+        <td class="average-cell">0.32</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">20</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag" />Stephane Lefebvre</td>
+        <td class="tyre-cell MRF">MRF</td>
+        <td class="car-cell yaris-i20">Yaris/i20 Rally2</td>
+        <td class="deficit-cell">1.01</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.99</td>
+        <td class="deficit-cell">0.84</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.66</td>
+        <td class="average-cell">1.00</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">21</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/nl.png" alt="Netherlands" class="flag" />Jos Verstappen</td>
+        <td class="tyre-cell P">P</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">1.63</td>
+        <td class="deficit-cell">2.01</td>
+        <td class="deficit-cell">2.06</td>
+        <td class="deficit-cell">2.27</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.77</td>
+        <td class="average-cell">1.98</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">22</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/cz.png" alt="Czech Republic" class="flag" />Dominik Stritesky</td>
+        <td class="tyre-cell H">H</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">1.11</td>
+        <td class="deficit-cell">2.71</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.52</td>
+        <td class="deficit-cell">0.39</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.69</td>
+        <td class="average-cell">1.14</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">23</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag" />Max McRae</td>
+        <td class="tyre-cell MRF">MRF</td>
+        <td class="car-cell citroen">Citroen C3 Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.97</td>
+        <td class="deficit-cell">0.98</td>
+        <td class="deficit-cell">1.57</td>
+        <td class="deficit-cell">1.82</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">1.68</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.64</td>
+        <td class="average-cell">1.38</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">24</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag" />Philip Allen</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.78</td>
+        <td class="deficit-cell">0.93</td>
+        <td class="deficit-cell">0.45</td>
+        <td class="deficit-cell">0.56</td>
+        <td class="deficit-cell">0.96</td>
+        <td class="deficit-cell">1.00</td>
+        <td class="deficit-cell">0.54</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.43</td>
+        <td class="average-cell">0.76</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">25</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/cz.png" alt="Czech Republic" class="flag" />Erik Cais</td>
+        <td class="tyre-cell M">M</td>
+        <td class="car-cell hyundai">Hyundai i20 Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.22</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.64</td>
+        <td class="stages-cell">0.7</td>
+        <td class="average-cell">0.35</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">26</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag" />Chris Ingram</td>
+        <td class="tyre-cell MRF">MRF</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">1.41</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="stages-cell">0.69</td>
+        <td class="average-cell">1.41</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">27</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Estonia" class="flag" />Lauri Joona</td>
+        <td class="tyre-cell MRF">MRF</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">1.52</td>
+        <td class="stages-cell">0.77</td>
+        <td class="average-cell">1.52</td>
+    </tr>
+    <tr>
+        <td class="ranking-cell">28</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/ee.png" alt="Estonia" class="flag" />Robert Virves</td>
+        <td class="tyre-cell H">H</td>
+        <td class="car-cell skoda">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">1.00</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">—</td>
+        <td class="deficit-cell">0.48</td>
+        <td class="stages-cell">0.7</td>
+        <td class="average-cell">0.71</td>
+    </tr>
+</table>
+</body>
+</html>

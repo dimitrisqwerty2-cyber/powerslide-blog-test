@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Average Stage Classification on Fast Gravel and Snow Rallies</title>
+    <link href="https://fonts.cdnfonts.com/css/wrc-clean" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'WRC Clean', 'WRC Clean', Arial, sans-serif;
+            text-align: center;
+            background: white;
+            color: black;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-family: 'WRC Clean Bold', 'WRC Clean', Arial, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 20px 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #19ae65 0%, #009696 100%);
+            padding: 15px;
+            border-radius: 8px 8px 0 0;
+        }
+        table {
+            width: 50%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            font-size: 12px;
+        }
+        th {
+            background: linear-gradient(135deg, #19ae65 0%, #009696 100%);
+            color: white;
+            font-family: 'WRC Clean Bold', 'WRC Clean', Arial, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 10px 5px;
+            font-size: 11px;
+            border: 1px solid #009696;
+            text-align: center;
+        }
+        td {
+            padding: 8px 5px;
+            text-align: center;
+            color: #333;
+            font-family: 'WRC Clean', 'WRC Clean', Arial, sans-serif;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+            font-size: 11px;
+        }
+        tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        img.flag {
+            width: 18px;
+            height: 12px;
+            vertical-align: middle;
+            margin-right: 5px;
+            border-radius: 1px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .ranking-cell {
+            font-family: 'WRC Clean Bold', 'WRC Clean', Arial, sans-serif;
+            font-weight: bold;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+        .driver-cell {
+            font-weight: 500;
+            text-align: left;
+            padding-left: 8px;
+        }
+        .toyota {
+            background-color: #FF0000;
+            color: white;
+            font-weight: bold;
+        }
+        .hyundai {
+            background-color: #003366;
+            color: white;
+            font-weight: bold;
+        }
+        .ford {
+            background-color: #0066CC;
+            color: white;
+            font-weight: bold;
+        }
+        .interval {
+            font-family: 'WRC Clean Bold', 'WRC Clean', Arial, sans-serif;
+            font-weight: bold;
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Average Stage Classification on Fast Gravel and Snow Rallies</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Ranking</th>
+                <th>Driver</th>
+                <th>Car</th>
+                <th>Gap</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="ranking-cell">1</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag" />Sebastien Ogier</td>
+                <td class="toyota">Toyota Yaris Rally1</td>
+                <td class="interval">Interval</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">2</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Kalle Rovanpera</td>
+                <td class="toyota">Toyota Yaris Rally1</td>
+                <td>+0.5</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">3</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/ee.png" alt="Estonia" class="flag" />Ott Tanak</td>
+                <td class="hyundai">Hyundai i20 Rally1</td>
+                <td>+1.0</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">4</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/be.png" alt="Belgium" class="flag" />Thierry Neuville</td>
+                <td class="hyundai">Hyundai i20 Rally1</td>
+                <td>+1.4</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">5</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag" />Adrien Fourmaux</td>
+                <td class="hyundai">Hyundai i20 Rally1</td>
+                <td>+1.9</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">=</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/gb-wls.png" alt="Wales" class="flag" />Elfyn Evans</td>
+                <td class="toyota">Toyota Yaris Rally1</td>
+                <td>+1.9</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">7</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/jp.png" alt="Japan" class="flag" />Takamoto Katsuta</td>
+                <td class="toyota">Toyota Yaris Rally1</td>
+                <td>+3.3</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">8</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Sami Pajari</td>
+                <td class="toyota">Toyota Yaris Rally1</td>
+                <td>+5.3</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">9</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/lv.png" alt="Latvia" class="flag" />Martins Sesks</td>
+                <td class="ford">Ford Puma Rally1</td>
+                <td>+8.4</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">10</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/ie.png" alt="Ireland" class="flag" />Josh McErlean</td>
+                <td class="ford">Ford Puma Rally1</td>
+                <td>+12.4</td>
+            </tr>
+            <tr>
+                <td class="ranking-cell">11</td>
+                <td class="driver-cell"><img src="https://flagcdn.com/w20/lu.png" alt="Luxembourg" class="flag" />Gregoire Munster</td>
+                <td class="ford">Ford Puma Rally1</td>
+                <td>+14.9</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

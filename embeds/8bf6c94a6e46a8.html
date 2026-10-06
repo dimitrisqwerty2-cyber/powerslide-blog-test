@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+    @font-face {
+        font-family: 'WRC Clean';
+        src: url('https://fonts.cdnfonts.com/css/wrc-clean') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: 'WRC Clean Bold';
+        src: url('https://fonts.cdnfonts.com/css/wrc-clean') format('woff2');
+        font-weight: bold;
+        font-style: normal;
+    }
+    body {
+        font-family: 'WRC Clean', 'Open Sans', Arial, sans-serif;
+        text-align: center;
+        background: white;
+        color: black;
+        margin: 0;
+        padding: 20px;
+    }
+    h2 {
+        font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+        font-size: 28px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+        color: black;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    table {
+        width: 85%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    th {
+        background: linear-gradient(135deg, #19ae65 0%, #009696 100%);
+        color: white;
+        font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 15px 10px;
+        font-size: 14px;
+        border: none;
+    }
+    td {
+        padding: 12px 10px;
+        text-align: center;
+        color: #333;
+        font-family: 'WRC Clean', 'Open Sans', Arial, sans-serif;
+        border-bottom: 1px solid #eee;
+        vertical-align: middle;
+    }
+    tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+    img.flag {
+        width: 24px;
+        height: 16px;
+        vertical-align: middle;
+        margin-right: 8px;
+        border-radius: 2px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    .rally-cell, .driver-cell {
+        font-weight: 500;
+    }
+    .deficit-cell {
+        font-family: 'WRC Clean Bold', 'Open Sans', Arial, sans-serif;
+        font-weight: bold;
+        color: #009696;
+    }
+    .car-cell {
+        font-size: 13px;
+        color: #666;
+    }
+    th.location-column {
+        width: 28%;
+    }
+    th.car-column {
+        width: 30%;
+    }
+    th.driver-column {
+        width: 25%;
+    }
+    th.deficit-column {
+        width: 17%;
+    }
+</style>
+<title>European Rally Championship 2025 - Driver Pace Ranking</title>
+</head>
+<body>
+<h2>European Rally Championship 2025 - Driver Pace Ranking</h2>
+<table>
+    <tr>
+        <th class="location-column">Rally</th>
+        <th class="driver-column">Driver</th>
+        <th class="car-column">Car</th>
+        <th class="deficit-column">s/km Deficit</th>
+    </tr>
+    <tr>
+        <td class="rally-cell"><img src="https://flagcdn.com/w20/es.png" alt="Spain" class="flag" />Rally Sierra Morena</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/bg.png" alt="Bulgaria" class="flag" />Nikolay Gryazin</td>
+        <td class="car-cell">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.07</td>
+    </tr>
+    <tr>
+        <td class="rally-cell"><img src="https://flagcdn.com/w20/hu.png" alt="Hungary" class="flag" />Rally Hungary</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag" />Roope Korhonen</td>
+        <td class="car-cell">Toyota Yaris Rally2</td>
+        <td class="deficit-cell">0.17</td>
+    </tr>
+    <tr>
+        <td class="rally-cell"><img src="https://flagcdn.com/w20/se.png" alt="Sweden" class="flag" />Rally Scandinavia</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/no.png" alt="Norway" class="flag" />Eyvind Brynildsen</td>
+        <td class="car-cell">Toyota Yaris Rally2</td>
+        <td class="deficit-cell">0.14</td>
+    </tr>
+    <tr>
+        <td class="rally-cell"><img src="https://flagcdn.com/w20/pl.png" alt="Poland" class="flag" />Rally Poland</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/lv.png" alt="Latvia" class="flag" />Martins Sesks</td>
+        <td class="car-cell">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.02</td>
+    </tr>
+    <tr>
+        <td class="rally-cell"><img src="https://flagcdn.com/w20/it.png" alt="Italy" class="flag" />Rally Roma Capitale</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/it.png" alt="Italy" class="flag" />Giandomenico Basso</td>
+        <td class="car-cell">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.13</td>
+    </tr>
+    <tr>
+        <td class="rally-cell"><img src="https://flagcdn.com/w20/cz.png" alt="Czech Republic" class="flag" />Barum Czech Rally Zlin</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/cz.png" alt="Czech Republic" class="flag" />Jan Kopecky</td>
+        <td class="car-cell">Skoda Fabia RS Rally2</td>
+        <td class="deficit-cell">0.15</td>
+    </tr>
+    <tr>
+        <td class="rally-cell"><img src="https://flagcdn.com/w20/gb-wls.png" alt="Wales" class="flag" />Rali Ceredigion</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/ie.png" alt="Northern Ireland" class="flag" />Jon Armstrong</td>
+        <td class="car-cell">Ford Fiesta Rally2</td>
+        <td class="deficit-cell">0.15</td>
+    </tr>
+    <tr>
+        <td class="rally-cell"><img src="https://flagcdn.com/w20/hr.png" alt="Croatia" class="flag" />Rally Croatia</td>
+        <td class="driver-cell"><img src="https://flagcdn.com/w20/ie.png" alt="Northern Ireland" class="flag" />Jon Armstrong</td>
+        <td class="car-cell">Ford Fiesta Rally2</td>
+        <td class="deficit-cell">0.08</td>
+    </tr>
+</table>
+</body>
+</html>

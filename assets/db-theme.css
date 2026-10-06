@@ -1,0 +1,135 @@
+/* Powerslide WRC Stats Database, dressed in the site's results-screen look (light and dark).
+   Loaded after the database's own CSS: it only re-points its colour tokens and restyles its components.
+   Colours come from the site's tokens in site.css, so both themes follow automatically. */
+html:root,html:root[data-theme],html:root[data-theme="light"]{
+  --color-primary:#8a4a6e; --color-primary-dark:#6a3354; --color-primary-soft:rgba(240,197,19,.28);
+  --color-secondary:#ddd0da; --color-bg:#efe7ed; --color-surface:#f6f1f4; --color-surface-2:#e9dfe6;
+  --color-text:#2a2a2c; --color-text-light:#5e4f61; --color-border:rgba(46,14,32,.2);
+  --color-border-subtle:rgba(46,14,32,.1); --color-border-strong:rgba(46,14,32,.22);
+  --color-accent:#b88a00; --chart-grid:rgba(42,42,44,.1); --chart-tick:#4b3f4e; --chart-tick-strong:#2a2a2c;
+  --card-shadow:rgba(66,18,38,.3); --shadow-soft:0 5px 0 rgba(66,18,38,.55);
+  --radius-sm:2px; --radius-md:2px; --radius-lg:2px; --radius-pill:2px;
+  --font-body:"WRC Clean",Arial,sans-serif;
+  --db-frame:linear-gradient(#f7f3f6,#efe8ed); --db-chip:linear-gradient(#ffffff,#e7dce4); --db-stat:rgba(255,255,255,.45);
+  --db-row-alt:rgba(203,183,198,.18); --db-line:rgba(46,14,32,.12); --db-gold-text:#a87b00; --db-hover-cell:#fff3b0;
+}
+html:root[data-theme="dark"]{
+  --color-primary:#c27ba4; --color-primary-dark:#8a4a6e; --color-primary-soft:rgba(240,197,19,.2);
+  --color-secondary:#3a2d38; --color-bg:#1f1a23; --color-surface:#2a2230; --color-surface-2:#241d29;
+  --color-text:#ece4ea; --color-text-light:#b3a3b1; --color-border:rgba(255,255,255,.13);
+  --color-border-subtle:rgba(255,255,255,.06); --color-border-strong:rgba(255,255,255,.16);
+  --color-accent:#f0c513; --chart-grid:rgba(255,255,255,.08); --chart-tick:#c4b6c3; --chart-tick-strong:#ece4ea;
+  --card-shadow:rgba(0,0,0,.5); --shadow-soft:0 5px 0 rgba(0,0,0,.6);
+  --db-frame:linear-gradient(#272029,#201a23); --db-chip:linear-gradient(#5a4458,#46344a); --db-stat:rgba(0,0,0,.18);
+  --db-row-alt:rgba(255,255,255,.035); --db-line:rgba(255,255,255,.08); --db-gold-text:#f0c513; --db-hover-cell:#6a5222;
+}
+
+/* frame */
+#pwdb{font-size:16px;font-weight:400;line-height:1.55;color:var(--color-text);background:none;min-height:0}
+#pwdb > .app-shell{padding:0;max-width:none}
+#pwdb > .app-shell > header{display:none}
+#pwdb .container{max-width:none;margin:0;padding:22px 24px 28px;border:0;border-radius:0;
+  background:var(--db-frame);box-shadow:0 5px 0 var(--drop),inset 0 2px 0 var(--paper-hi)}
+#pwdb h2,#pwdb h3{font-family:var(--display);font-weight:700}
+
+/* intro: a lavender cell with the mauve side bar */
+#pwdb .intro-box{background:var(--cell)!important;border:0!important;border-left:8px solid var(--accent)!important;border-radius:0!important;
+  box-shadow:0 5px 0 var(--drop),inset 0 2px 0 var(--hi)!important;color:var(--ink)}
+#pwdb .intro-box h3{color:var(--ink-hl)!important;font-size:22px!important}
+#pwdb .intro-box a{color:var(--link)}
+
+/* inputs */
+#pwdb .search-section{background:none;border:0;box-shadow:none}
+#pwdb input[type="text"],#pwdb input[type="search"],#pwdb input:not([type]),#pwdb .search-input,#pwdb select,#pwdb input[type="number"]{
+  background:var(--cell-solid);border:0;border-radius:0;color:var(--ink);font-family:var(--display);font-weight:700;
+  box-shadow:0 4px 0 var(--drop),inset 0 2px 0 var(--hi-strong)}
+#pwdb select option{background:var(--color-surface);color:var(--color-text)}
+#pwdb input::placeholder{color:var(--placeholder)}
+#pwdb input:focus,#pwdb select:focus{outline:2px solid #f0c513;outline-offset:1px}
+
+/* buttons: mauve cells, gold on hover/active */
+#pwdb button{border-radius:0;font-family:var(--display);font-weight:700;letter-spacing:.02em}
+#pwdb button:not([class]),#pwdb .reset-btn,#pwdb #resetBtn{background:var(--strip);color:#fff;box-shadow:0 4px 0 var(--drop),inset 0 2px 0 rgba(255,255,255,.25)}
+#pwdb button:not([class]):hover,#pwdb .reset-btn:hover,#pwdb #resetBtn:hover{background:var(--gold);color:var(--on-gold);box-shadow:0 4px 0 var(--drop);transform:none}
+
+/* mode selector = the nav strip */
+#pwdb .mode-selector{background:var(--strip);border-top:2px solid var(--strip-edge);border-bottom:2px solid var(--strip-edge);
+  padding:10px;gap:8px;margin:18px -24px;border-radius:0}
+#pwdb .mode-btn{border-radius:0;border:0;background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);
+  text-shadow:0 1px 0 rgba(40,10,30,.6);font-family:var(--display)}
+#pwdb .mode-btn *{color:inherit!important}
+#pwdb .mode-btn svg{stroke:currentColor}
+#pwdb .mode-btn:hover{background:rgba(255,255,255,.22);color:#fff}
+#pwdb .mode-btn.active{background:var(--gold);color:var(--on-gold);text-shadow:none;box-shadow:0 4px 0 var(--drop),inset 0 2px 0 rgba(255,255,255,.45)}
+
+/* season pickers = rows of position cells on the grey band */
+#pwdb .season-selector{background:var(--band-top);padding:12px;border-radius:0;box-shadow:0 5px 0 var(--drop),inset 0 2px 0 var(--hi-strong);border:0}
+#pwdb .season-btn,#pwdb .view-btn,#pwdb .map-style-btn,#pwdb .hof-subrally-btn{border:0;border-radius:0;background:var(--cell-solid);color:var(--ink);
+  font-family:var(--display);font-weight:700;box-shadow:0 3px 0 var(--drop),inset 0 2px 0 var(--hi-strong)}
+#pwdb .season-btn:hover,#pwdb .view-btn:hover,#pwdb .map-style-btn:hover,#pwdb .hof-subrally-btn:hover{background:var(--db-hover-cell);color:var(--ink-hl)}
+#pwdb .season-btn.active,#pwdb .view-btn.active,#pwdb .map-style-btn.active,#pwdb .hof-subrally-btn.active{background:var(--gold);color:var(--on-gold);border:0}
+#pwdb .filter-group label{font-family:var(--display);font-weight:700;color:var(--ink-mute);letter-spacing:.06em}
+
+/* driver cards = lavender cells with the team colour down the side */
+#pwdb .driver-card{background:var(--cell-solid);color:var(--ink);border:0;border-left:6px solid var(--dc,#9a5b7f);border-radius:0;
+  box-shadow:0 5px 0 var(--drop),inset 0 2px 0 var(--hi-strong)}
+#pwdb .driver-card:hover{border-left-color:var(--dc,#9a5b7f);transform:translateY(-2px);
+  box-shadow:0 7px 0 var(--drop),0 0 0 2px rgba(var(--dc-r,240),var(--dc-g,197),var(--dc-b,19),.55)}
+#pwdb .driver-card.selected{background:var(--gold);box-shadow:0 5px 0 var(--drop),0 0 0 2px #2a2a2c;
+  --ink:#2a2a2c;--ink-hl:#1c1c1c;--ink-mute:#5b4a5e}
+#pwdb .driver-rank{display:inline-flex;align-items:center;justify-content:center;min-width:46px;height:42px;padding:0 8px;
+  background:var(--db-chip);color:var(--ink-hl);box-shadow:0 3px 0 var(--drop),inset 0 0 0 1px var(--db-line);font-family:var(--display)}
+#pwdb .driver-name{color:var(--ink-hl)!important;font-family:var(--display);font-weight:700}
+#pwdb .driver-car{color:var(--ink-mute)!important}
+#pwdb .stat-grid{gap:8px}
+#pwdb .stat{background:var(--db-stat);padding:6px 8px;box-shadow:inset 0 -2px 0 var(--db-line)}
+#pwdb .stat-label{color:var(--ink-mute);font-family:var(--display);font-weight:700;letter-spacing:.05em}
+#pwdb .stat-value{color:var(--ink-hl);font-family:var(--display)}
+#pwdb .flag-img{box-shadow:0 0 0 1px rgba(28,8,18,.6)}
+
+/* tables: mauve strip header, lavender rows, gold hover */
+#pwdb table th{background:var(--strip);color:#fff;font-family:var(--display);font-weight:700;border-color:var(--strip-edge)}
+#pwdb table td{border-color:var(--db-line)}
+#pwdb table tbody tr:nth-child(even) td{background:var(--db-row-alt)}
+#pwdb table tbody tr:hover td{background:rgba(240,197,19,.22)}
+
+/* site chrome: undo the database's global button rules on the header search and theme switch */
+.search-form button{border-radius:0;text-transform:none;letter-spacing:0;min-height:0;transform:none!important;box-shadow:none;
+  background:var(--gold);color:var(--on-gold);padding:0 14px;font:700 15px var(--display);border-top:2px solid rgba(255,255,255,.5)}
+.search-form button:hover{background:var(--gold);filter:brightness(1.06);box-shadow:none}
+.theme-btn{border-radius:0;text-transform:none;letter-spacing:0;min-height:0;transform:none!important;font:700 14px/1 var(--display);
+  background:var(--cell-solid);color:var(--ink);padding:9px 11px;box-shadow:0 4px 0 var(--drop),inset 0 2px 0 var(--hi-strong)}
+.theme-btn:hover{background:var(--gold);color:var(--on-gold);box-shadow:0 4px 0 var(--drop)}
+.db-panel .wrap{max-width:1440px}
+@media (max-width:640px){#pwdb .container{padding:14px 10px 18px}#pwdb .mode-selector{margin:14px -10px}}
+/* the database animates every <canvas> it finds; keep it off the site's own */
+.glitch canvas,#glow{animation:none!important;clip-path:none!important}
+/* sortable headers mark the active column with an inline colour: make that gold on the strip */
+#pwdb th[style*="color:var(--color-text)"],#pwdb th[style*="color: var(--color-text)"]{color:#fad623!important}
+#pwdb th[style*="color:var(--color-text-light)"],#pwdb th[style*="color: var(--color-text-light)"]{color:#fff!important}
+#pwdb th [style*="color:var(--color-primary)"],#pwdb th[style*="color:var(--color-primary)"]{color:#fad623!important}
+/* heat-map cells tint their background and text the same hue (made for the dark theme):
+   light mode keeps the tint and inks the numbers; dark mode uses the database's own colours */
+html:root:not([data-theme="dark"]) #pwdb .pvr-heat-cell,html:root:not([data-theme="dark"]) #pwdb .pvr-heat-cell small{color:#1c1c1c!important}
+#pwdb .pvr-stat-val.gold{color:var(--db-gold-text)}
+#pwdb .pvr-card,#pwdb .pvr-stat-cell{border-radius:0;box-shadow:0 4px 0 var(--drop),inset 0 2px 0 var(--hi-strong);border:0}
+/* square text buttons like the graphic; round close buttons keep their shape */
+#pwdb button:not([class*="close"]):not([class*="dismiss"]):not(.leaflet-control *),body > div button[class*="btn"]:not([class*="close"]){border-radius:0!important}
+/* the global search sits in its own box: the input inside it stays plain */
+#pwdb #pwSearchInput{background:none;box-shadow:none;outline:0}
+#pwdb .search-input{flex:1 1 auto;align-self:stretch;max-height:52px}
+@media (max-width:640px){#pwdb .search-input{flex:0 0 auto;height:46px}}
+/* standings-graphic tiles for flags and manufacturer logos */
+#pwdb img[src*="assets/tiles/flag_"]{object-fit:cover;border-radius:0!important;border:0!important;box-shadow:0 2px 0 var(--drop)!important}
+#pwdb img[src*="assets/tiles/badge_"]{background:none!important;padding:0!important;border:0!important;border-radius:0!important;
+  object-fit:cover;box-shadow:0 2px 0 var(--drop)!important;filter:none!important}
+#pwdb .driver-card .flag-img{width:36px!important;height:24px!important}
+#pwdb .driver-card .car-logo{height:28px!important;width:auto!important}
+html:root:not([data-theme="dark"]) #pwdb .driver-toggle-btn{color:var(--ink-hl)!important}
+/* dark mode: the database's darkest green is used as TEXT on dark cells here and there; lift it (backgrounds keep it) */
+html:root[data-theme="dark"] #pwdb [style*="color:#2d5016"]:not([style*="background"]),html:root[data-theme="dark"] #pwdb [style*="color: #2d5016"]:not([style*="background"]),
+html:root[data-theme="dark"] #pwdb [style*="color: rgb(45, 80, 22)"]:not([style*="background"]),html:root[data-theme="dark"] #pwdb [style*="color:rgb(45,80,22)"]:not([style*="background"]){color:#7cbf55!important}
+/* dark mode: heat cells and pace pills get white numbers with a shadow, readable on every tint */
+html:root[data-theme="dark"] #pwdb .pvr-heat-cell,html:root[data-theme="dark"] #pwdb .pvr-heat-cell small,
+html:root[data-theme="dark"] #pwdb .pw-r-pace{color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.85)}
+html:root[data-theme="dark"] #pwdb .selected-driver-tag{background:#6e3a5a!important;color:#fff!important}

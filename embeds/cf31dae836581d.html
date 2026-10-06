@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .green {
+            background-color: #c6efce;
+        }
+        .yellow {
+            background-color: #ffeb9c;
+        }
+        .red {
+            background-color: #ffc7ce;
+        }
+        .flag {
+            width: 18px;
+            height: 12px;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        .white-bg {
+            background-color: white;
+        }
+        th.team-column {
+            width: 25%;
+        }
+        th.average-column {
+            width: 20%;
+        }
+    </style>
+    <title>Driver Performance Table</title>
+</head>
+<body>
+<h2>Driver Performance Table</h2>
+<table>
+    <tr>
+        <th>Ranking</th>
+        <th>Driver</th>
+        <th class="team-column">Car</th>
+        <th>s/km deficit</th>
+        <th>Mileage covered (%)</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag">Sebastien Ogier</td>
+        <td>Ford Fiesta WRC</td>
+        <td class="yellow white-bg">0.35</td>
+        <td class="green white-bg">0.88</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td><img src="https://flagcdn.com/w20/be.png" alt="Belgium" class="flag">Thierry Neuville</td>
+        <td>Hyundai i20 WRC</td>
+        <td class="yellow white-bg">0.24</td>
+        <td class="green white-bg">0.90</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td><img src="https://flagcdn.com/w20/ee.png" alt="Estonia" class="flag">Ott Tanak</td>
+        <td>Ford Fiesta WRC</td>
+        <td class="yellow white-bg">0.32</td>
+        <td class="green white-bg">0.92</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag">Jari-Matti Latvala</td>
+        <td>Toyota Yaris WRC</td>
+        <td class="yellow white-bg">0.41</td>
+        <td class="green white-bg">0.86</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td><img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag">Elfyn Evans</td>
+        <td>Ford Fiesta WRC</td>
+        <td class="red white-bg">0.68</td>
+        <td class="yellow white-bg">0.85</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td><img src="https://flagcdn.com/w20/es.png" alt="Spain" class="flag">Dani Sordo</td>
+        <td>Hyundai i20 WRC</td>
+        <td class="yellow white-bg">0.57</td>
+        <td class="yellow white-bg">0.92</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td><img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag">Kris Meeke</td>
+        <td>Citroen C3 WRC</td>
+        <td class="yellow white-bg">0.40</td>
+        <td class="red white-bg">0.70</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td><img src="https://flagcdn.com/w20/nz.png" alt="New Zealand" class="flag">Hayden Paddon</td>
+        <td>Hyundai i20 WRC</td>
+        <td class="yellow white-bg">0.55</td>
+        <td class="yellow white-bg">0.72</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag">Juho Hanninen</td>
+        <td>Toyota Yaris WRC</td>
+        <td class="red white-bg">0.68</td>
+        <td class="red white-bg">0.77</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td><img src="https://flagcdn.com/w20/ie.png" alt="Ireland" class="flag">Craig Breen</td>
+        <td>Citroen C3 WRC</td>
+        <td class="yellow white-bg">0.59</td>
+        <td class="red white-bg">0.75</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag">Esapekka Lappi</td>
+        <td>Toyota Yaris WRC</td>
+        <td class="yellow white-bg">0.55</td>
+        <td class="yellow white-bg">0.74</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td><img src="https://flagcdn.com/w20/no.png" alt="Norway" class="flag">Andreas Mikkelsen</td>
+        <td>Hyundai i20 WRC</td>
+        <td class="yellow white-bg">0.56</td>
+        <td class="yellow white-bg">0.90</td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td><img src="https://flagcdn.com/w20/fr.png" alt="France" class="flag">Stephane Lefebvre</td>
+        <td>Citroen C3 WRC</td>
+        <td class="red white-bg">1.17</td>
+        <td class="red white-bg">0.78</td>
+    </tr>
+    <tr>
+        <td>14</td>
+        <td><img src="https://flagcdn.com/w20/fi.png" alt="Finland" class="flag">Teemu Suninen</td>
+        <td>Ford Fiesta WRC</td>
+        <td class="yellow white-bg">0.53</td>
+        <td class="green white-bg">0.93</td>
+    </tr>
+    <tr>
+        <td>15</td>
+        <td><img src="https://flagcdn.com/w20/no.png" alt="Norway" class="flag">Mads Ostberg</td>
+        <td>Ford Fiesta WRC</td>
+        <td class="yellow white-bg">0.61</td>
+        <td class="yellow white-bg">0.87</td>
+    </tr>
+</table>
+</body>
+</html>
