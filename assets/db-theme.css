@@ -2,25 +2,25 @@
    Loaded after the database's own CSS: it only re-points its colour tokens and restyles its components.
    Colours come from the site's tokens in site.css, so both themes follow automatically. */
 html:root,html:root[data-theme],html:root[data-theme="light"]{
-  --color-primary:#8a4a6e; --color-primary-dark:#6a3354; --color-primary-soft:rgba(240,197,19,.28);
-  --color-secondary:#ddd0da; --color-bg:#efe7ed; --color-surface:#f6f1f4; --color-surface-2:#e9dfe6;
-  --color-text:#2a2a2c; --color-text-light:#5e4f61; --color-border:rgba(46,14,32,.2);
-  --color-border-subtle:rgba(46,14,32,.1); --color-border-strong:rgba(46,14,32,.22);
-  --color-accent:#b88a00; --chart-grid:rgba(42,42,44,.1); --chart-tick:#4b3f4e; --chart-tick-strong:#2a2a2c;
-  --card-shadow:rgba(66,18,38,.3); --shadow-soft:0 5px 0 rgba(66,18,38,.55);
+  --color-primary:#0a8a68; --color-primary-dark:#06664e; --color-primary-soft:rgba(240,197,19,.28);
+  --color-secondary:#d2e8df; --color-bg:#e8f3ee; --color-surface:#f2f8f5; --color-surface-2:#e0eee8;
+  --color-text:#2a2a2c; --color-text-light:#4a5e58; --color-border:rgba(0,48,40,.2);
+  --color-border-subtle:rgba(0,48,40,.1); --color-border-strong:rgba(0,48,40,.22);
+  --color-accent:#b88a00; --chart-grid:rgba(42,42,44,.1); --chart-tick:#3f504b; --chart-tick-strong:#2a2a2c;
+  --card-shadow:rgba(0,46,38,.3); --shadow-soft:0 5px 0 rgba(0,46,38,.55);
   --radius-sm:2px; --radius-md:2px; --radius-lg:2px; --radius-pill:2px;
   --font-body:"WRC Clean",Arial,sans-serif;
-  --db-frame:linear-gradient(#f7f3f6,#efe8ed); --db-chip:linear-gradient(#ffffff,#e7dce4); --db-stat:rgba(255,255,255,.45);
-  --db-row-alt:rgba(203,183,198,.18); --db-line:rgba(46,14,32,.12); --db-gold-text:#a87b00; --db-hover-cell:#fff3b0;
+  --db-frame:linear-gradient(#f3f9f6,#e8f2ee); --db-chip:linear-gradient(#ffffff,#d9ece4); --db-stat:rgba(255,255,255,.45);
+  --db-row-alt:rgba(150,215,192,.2); --db-line:rgba(0,48,40,.12); --db-gold-text:#a87b00; --db-hover-cell:#fff3b0;
 }
 html:root[data-theme="dark"]{
-  --color-primary:#c27ba4; --color-primary-dark:#8a4a6e; --color-primary-soft:rgba(240,197,19,.2);
-  --color-secondary:#3a2d38; --color-bg:#1f1a23; --color-surface:#2a2230; --color-surface-2:#241d29;
-  --color-text:#ece4ea; --color-text-light:#b3a3b1; --color-border:rgba(255,255,255,.13);
+  --color-primary:#2fc28c; --color-primary-dark:#0a8a68; --color-primary-soft:rgba(240,197,19,.2);
+  --color-secondary:#1f3a34; --color-bg:#141f1d; --color-surface:#1b2a27; --color-surface-2:#172421;
+  --color-text:#e3f0eb; --color-text-light:#9fb6ae; --color-border:rgba(255,255,255,.13);
   --color-border-subtle:rgba(255,255,255,.06); --color-border-strong:rgba(255,255,255,.16);
-  --color-accent:#f0c513; --chart-grid:rgba(255,255,255,.08); --chart-tick:#c4b6c3; --chart-tick-strong:#ece4ea;
+  --color-accent:#f0c513; --chart-grid:rgba(255,255,255,.08); --chart-tick:#b4c9c2; --chart-tick-strong:#e3f0eb;
   --card-shadow:rgba(0,0,0,.5); --shadow-soft:0 5px 0 rgba(0,0,0,.6);
-  --db-frame:linear-gradient(#272029,#201a23); --db-chip:linear-gradient(#5a4458,#46344a); --db-stat:rgba(0,0,0,.18);
+  --db-frame:linear-gradient(#1c2725,#161f1d); --db-chip:linear-gradient(#2e5a50,#21443c); --db-stat:rgba(0,0,0,.18);
   --db-row-alt:rgba(255,255,255,.035); --db-line:rgba(255,255,255,.08); --db-gold-text:#f0c513; --db-hover-cell:#6a5222;
 }
 
@@ -56,7 +56,7 @@ html:root[data-theme="dark"]{
 #pwdb .mode-selector{background:var(--strip);border-top:2px solid var(--strip-edge);border-bottom:2px solid var(--strip-edge);
   padding:10px;gap:8px;margin:18px -24px;border-radius:0}
 #pwdb .mode-btn{border-radius:0;border:0;background:rgba(255,255,255,.12);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);
-  text-shadow:0 1px 0 rgba(40,10,30,.6);font-family:var(--display)}
+  text-shadow:0 1px 0 rgba(0,30,24,.6);font-family:var(--display)}
 #pwdb .mode-btn *{color:inherit!important}
 #pwdb .mode-btn svg{stroke:currentColor}
 #pwdb .mode-btn:hover{background:rgba(255,255,255,.22);color:#fff}
@@ -71,9 +71,9 @@ html:root[data-theme="dark"]{
 #pwdb .filter-group label{font-family:var(--display);font-weight:700;color:var(--ink-mute);letter-spacing:.06em}
 
 /* driver cards = lavender cells with the team colour down the side */
-#pwdb .driver-card{background:var(--cell-solid);color:var(--ink);border:0;border-left:6px solid var(--dc,#9a5b7f);border-radius:0;
+#pwdb .driver-card{background:var(--cell-solid);color:var(--ink);border:0;border-left:6px solid var(--dc,#0f9e72);border-radius:0;
   box-shadow:0 5px 0 var(--drop),inset 0 2px 0 var(--hi-strong)}
-#pwdb .driver-card:hover{border-left-color:var(--dc,#9a5b7f);transform:translateY(-2px);
+#pwdb .driver-card:hover{border-left-color:var(--dc,#0f9e72);transform:translateY(-2px);
   box-shadow:0 7px 0 var(--drop),0 0 0 2px rgba(var(--dc-r,240),var(--dc-g,197),var(--dc-b,19),.55)}
 #pwdb .driver-card.selected{background:var(--gold);box-shadow:0 5px 0 var(--drop),0 0 0 2px #2a2a2c;
   --ink:#2a2a2c;--ink-hl:#1c1c1c;--ink-mute:#5b4a5e}
@@ -85,7 +85,7 @@ html:root[data-theme="dark"]{
 #pwdb .stat{background:var(--db-stat);padding:6px 8px;box-shadow:inset 0 -2px 0 var(--db-line)}
 #pwdb .stat-label{color:var(--ink-mute);font-family:var(--display);font-weight:700;letter-spacing:.05em}
 #pwdb .stat-value{color:var(--ink-hl);font-family:var(--display)}
-#pwdb .flag-img{box-shadow:0 0 0 1px rgba(28,8,18,.6)}
+#pwdb .flag-img{box-shadow:0 0 0 1px rgba(0,22,18,.6)}
 
 /* tables: mauve strip header, lavender rows, gold hover */
 #pwdb table th{background:var(--strip);color:#fff;font-family:var(--display);font-weight:700;border-color:var(--strip-edge)}
@@ -132,6 +132,8 @@ html:root[data-theme="dark"] #pwdb [style*="color: rgb(45, 80, 22)"]:not([style*
 /* dark mode: heat cells and pace pills get white numbers with a shadow, readable on every tint */
 html:root[data-theme="dark"] #pwdb .pvr-heat-cell,html:root[data-theme="dark"] #pwdb .pvr-heat-cell small,
 html:root[data-theme="dark"] #pwdb .pw-r-pace{color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.85)}
-html:root[data-theme="dark"] #pwdb .selected-driver-tag{background:#6e3a5a!important;color:#fff!important}
+html:root[data-theme="dark"] #pwdb .selected-driver-tag{background:#0e6b55!important;color:#fff!important}
 /* Road Conditions mode is not published on the site */
 #pwdb #roadCondModeBtn,#pwdb #roadCondView{display:none!important}
+/* more room between a chart and whatever follows it (e.g. the career pace table) */
+#pwdb div:has(> canvas) + div{margin-top:3rem!important}

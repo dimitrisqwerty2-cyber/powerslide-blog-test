@@ -40,5 +40,28 @@ function walk(o,depth,lightMode){
   });
 }
 function isLight(){return document.documentElement.getAttribute('data-theme')!=='dark';}
-function ink(chart){try{walk(chart.config.options,0,isLight());}catch(e){}}
+/* white driver colours (e.g. white Ford liveries) vanish on the light panel: draw them dark grey in light mode.
+   Colours can be plain strings, per-point arrays or functions (segment colours); originals are kept for dark mode. */
+var GREY='#55555c';
+function swapWhite(v){
+  if(typeof v==='string'){var a=light(v);return (a!=null&&a>0.5)?GREY:v;}
+  if(Array.isArray(v))return v.map(swapWhite);
+  if(typeof v==='function')return function(){return swapWhite(v.apply(this,arguments));};
+  return v;
+}
+function inkProps(o,keys,lightMode){
+  if(!o)return;
+  keys.forEach(function(k){
+    var keep='__pw_'+k;
+    if(lightMode){if(o[k]!==undefined&&o[keep]===undefined){o[keep]=o[k];o[k]=swapWhite(o[k]);}}
+    else if(o[keep]!==undefined){o[k]=o[keep];delete o[keep];}
+  });
+}
+function inkData(chart,lightMode){
+  ((chart.config.data||{}).datasets||[]).forEach(function(ds){
+    inkProps(ds,['borderColor','backgroundColor','pointBackgroundColor','pointBorderColor','pointHoverBackgroundColor'],lightMode);
+    inkProps(ds.segment,['borderColor'],lightMode);
+  });
+}
+function ink(chart){try{var l=isLight();walk(chart.config.options,0,l);inkData(chart,l);}catch(e){}}
 })();
