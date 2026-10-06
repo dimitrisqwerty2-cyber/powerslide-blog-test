@@ -370,3 +370,8 @@ a{color:inherit}
   .nav .dd:hover > a.on,.nav .dd:focus-within > a.on{background:var(--gold)}
 }
 @media (max-width:1100px){.nav .caret{display:none}}
+/* homepage: four large story cards between the podcast band and the list columns */
+.bigfour{margin-top:34px}
+.bigfour .card .tile{aspect-ratio:4/3}
+.bigfour .card h3{font-size:22px;line-height:1.15}
+.bigfour .card p{-webkit-line-clamp:4;font-size:14.5px}
