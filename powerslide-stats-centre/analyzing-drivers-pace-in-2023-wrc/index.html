@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script>(function(){var t;try{t=localStorage.getItem('psTheme')}catch(e){}if(t!=='light'&&t!=='dark')t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t)})()</script>
+<meta name="color-scheme" content="light dark">
+<title>Analyzing the Drivers&#x27; Pace in the 2023 WRC Season | Powerslide Blog</title>
+<meta name="description" content="The 2023 WRC history is now in the history books. Kalle Rovanpera was the champion, with the Finn claiming his 2 nd consecutive championship crown ahead of teammate Elfyn Evans. But were these two indeed the fastest drivers this season? Tha">
+<link rel="canonical" href="https://www.powerslideblog.com/powerslide-stats-centre/analyzing-drivers-pace-in-2023-wrc">
+<meta property="og:type" content="article"><meta property="og:site_name" content="Powerslide Blog">
+<meta property="og:title" content="Analyzing the Drivers&#x27; Pace in the 2023 WRC Season"><meta property="og:description" content="The 2023 WRC history is now in the history books. Kalle Rovanpera was the champion, with the Finn claiming his 2 nd consecutive championship crown ahead of teammate Elfyn Evans. But were these two indeed the fastest drivers this season? Tha">
+<meta property="og:url" content="https://dimitrisqwerty2-cyber.github.io/powerslide-blog-test/powerslide-stats-centre/analyzing-drivers-pace-in-2023-wrc/">
+<meta property="og:image" content="https://dimitrisqwerty2-cyber.github.io/powerslide-blog-test/share/7197a4d064309ed5.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Analyzing the Drivers&#x27; Pace in the 2023 WRC Season">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Analyzing the Drivers&#x27; Pace in the 2023 WRC Season"><meta name="twitter:description" content="The 2023 WRC history is now in the history books. Kalle Rovanpera was the champion, with the Finn claiming his 2 nd consecutive championship crown ahead of teammate Elfyn Evans. But were these two indeed the fastest drivers this season? Tha"><meta name="twitter:image" content="https://dimitrisqwerty2-cyber.github.io/powerslide-blog-test/share/7197a4d064309ed5.jpg">
+<link rel="icon" href="../../assets/img/PS_icon_black.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link rel="preload" href="../../assets/fonts/wrc-clean-bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../assets/site.css?v=47ac3440">
+</head>
+<body data-root="../../">
+<canvas id="glow" aria-hidden="true"></canvas>
+<header class="top"><div class="top-in">
+<a class="brand" href="../../" aria-label="Powerslide Blog home"><img src="../../assets/img/PSB_full_black.png" alt="Powerslide Blog" width="811" height="246"></a>
+<div class="top-title"><div class="glitch" data-text="Stats Posts"><span class="gtxt">Stats Posts</span></div>
+<div class="top-tools"><button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.7 14.3A8.5 8.5 0 0 1 9.7 3.3a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 1.8v2.6M12 19.6v2.6M1.8 12h2.6M19.6 12h2.6M4.8 4.8l1.8 1.8M17.4 17.4l1.8 1.8M4.8 19.2l1.8-1.8M17.4 6.6l1.8-1.8"/></g></svg><span class="lbl">Dark</span></button><form class="search-form" action="../../search/" role="search"><input name="q" placeholder="Search articles" aria-label="Search articles"><button>Go</button></form></div></div>
+</div></header>
+<nav class="strip" aria-label="Sections"><div class="nav"><a href="../../">Home</a><a href="../../wrc-news/">News</a><a href="../../wrc-route-previews/">Route Previews</a><a href="../../stats/">Stats Database</a><a href="../" class=on aria-current=page>Stats Posts</a><a href="../../wrc-history/">History</a><a href="../../rally-acropolis-posts/">Acropolis Rally Posts</a><a href="../../30-goat-wrc-stages/">Top 30 Stages</a><a href="../../concept-itineraries/">Concepts</a><a href="../../in-greek/">Ελληνικά</a><a href="../../about/">About</a></div></nav>
+
+<main class="panel"><div class="wrap">
+<div class="split"><article>
+<div class="ahead"><div class="tile"><img src="../../media/66e2b45389a264f3.webp" alt=""></div><div class="cap cell"><div class="crumbs"><a class="tag" href="../">Stats Posts</a></div><h1>Analyzing the Drivers&#x27; Pace in the 2023 WRC Season</h1></div></div>
+<div class="paper"><div class="prose">
+<p>The 2023 WRC history is now in the
+history books. Kalle Rovanpera was the champion, with the Finn claiming his 2<sup>nd</sup>
+consecutive championship crown ahead of teammate Elfyn Evans. But were these
+two indeed the fastest drivers this season? That’s what we are going to find
+out in this post, as I have analysed the pace from all the drivers this season,
+excluding stages were punctures/spins/crashes or mechanical issues made an
+appearance. This is a follow up to <a href="../../wrc-news/analyzing-drivers-pace-in-this-season/"><strong>my mid-season pace analysis post</strong></a> that I made
+after Rally Estonia, so you can check that if you want before reading this, to
+compare the mid-season to the end of the season results! An honourable mention goes to Craig Breen who was 0,16 s/km slower than the ideal pace in Sweden, and was the fastest on that rally.</p>
+<p class="c">Without
+further ado, let’s get into the list.</p>
+<h2>11 . Grégoire
+Munster – 1 s/km – 23 stages</h2>
+<figure><div class="tile"><img loading="lazy" src="../../media/66e2b45389a264f3.webp" alt=""></div></figure>
+<p>Gregoire
+Munster is a pleasant surprise in terms of pace. Most people that follow WRC
+expected the Luxembourger to be some way off the pace, but he held his own
+against his more experienced Rally1 colleagues. Especially in the Central
+European Rally, Munster was very good on wet tarmac, often being faster than
+teammate Loubet, Suninen and Taka Katsuta. These are encouraging signs for
+Munster, let’s see what he can do if he gets more Rally1 outings next season.</p>
+<p class="c"><strong>Best Performance: </strong>CER: 0,9 s/km (13 stages)</p>
+<p class="c"><strong>Worst Performance: </strong>Chile<strong>:</strong> 1,13 s/km (10 stages)</p>
+<h2>10 . Pierre Louis
+Loubet – 0,74 s/km – 103 stages</h2>
+<figure><div class="tile"><img loading="lazy" src="../../media/c4d8347e2079717f.webp" alt=""></div></figure>
+<p>Where
+do we start with Pierre Louis season… The Frenchman headed into 2023 hoping to
+build on his encouraging 2022 part time programme, but instead his season
+resembled more of his disastrous 2021 season with 2C Competition. There were
+signs of pace on rough gravel events, perhaps also because of his favourable
+road position, but Pierre Louis scored a combined 0 points on rough gravel
+events this season. Not all retirements were his fault, as the Puma was
+unreliable, especially on the first half of the season. Loubet also parted ways
+with Nicolas Gilsoul at the end of the season, aiming for a hard reset for
+2024. Whether or not he will have a chance at having that reset, that’s another
+story…</p>
+<p class="c"><strong>Best Performance: </strong>Chile: 0,25 s/km (8 stages)</p>
+<p class="c"><strong>Worst Performance: </strong>Mexico: 1,41 s/km (6 stages)</p>
+<h3>9. Takamoto Katsuta – 0,58 s/km – 181 stages</h3>
+<figure><div class="tile"><img loading="lazy" src="../../media/fddbb068000d053e.webp" alt=""></div></figure>
+<p>It
+was truly a season of 2 halves for Japan’s Takamoto Katsuta. The Toyota driver
+had a less than ideal start to the season, with 4 non scores in the first 6
+rallies of the season. His 2<sup>nd</sup> half was a lot better, with a podium
+in Finland and a very strong outing in his home rally in Japan. Taka’s problem
+is that he is a driver who lacks that consistency. Across the season he has
+ranged from the slowest of the Rally1s in rallies like Acropolis and Estonia,
+to the fastest in the finale in Japan (albeit, we don’t know how much people
+were pushing on Saturday and Sunday).</p>
+<p class="c"><strong>Best Performance: </strong>Japan: 0,15 s/km (13 stages)</p>
+<p class="c"><strong>Worst Performance</strong>: Mexico: 1,16 s/km (9 stages)</p>
+<h3>8. Dani Sordo – 0,54 s/km – 96 stages</h3>
+<figure><div class="tile"><img loading="lazy" src="../../media/ff862f95addd4c83.webp" alt=""></div></figure>
+<p>Dani
+Sordo’s 2023 season was also a mixed bag. In Monte he looked like he hadn’t
+driven a Rally1 on tarmac before, but in Portugal he looked like he had found
+good rhythm in his i20, to finish 2<sup>nd</sup>. In general, Sordo was a sort
+of buffer between the top 5 drivers and what I like to call WRC 1.5, of Taka,
+Loubet and any other gentleman driver. 2 podiums is not bad at all, but the
+Spaniard seems to be getting those because of his consistency and not his
+outright speed. Let’s see what he can do in 2024, which is set to be his swan
+song in the WRC.</p>
+<p class="c"><strong>Best Performance: </strong>Portugal: 0,32 s/km (17 stages)</p>
+<p class="c"><strong>Worst Performance</strong>: Monte Carlo: 0,87 s/km (17 stages)</p>
+<h3>7. Teemu Suninen – 0,48 s/km – 69 stages</h3>
+<figure><div class="tile"><img loading="lazy" src="../../media/ebb8299c462cf666.webp" alt=""></div></figure>
+<p>From
+one Hyundai to the other, we move to Teemu Suninen. Suninen was drafted as a replacement
+for Craig Breen for mostly fast gravel events, and the Finn did okay. 5<sup>th</sup>
+in Estonia and 4<sup>th</sup> in Finland were the highlights of his season,
+with the Finn showing promising pace. He could have had 2<sup>nd</sup> in
+Chile, but he broke his suspension driving over a tree stump on the penultimate
+stage and retiring. A subpar CER followed, but the conditions were difficult,
+especially for someone who doesn’t have experience in a Rally1 on tarmac. All
+in all, Suninen showed that he can be competitive in a Rally1 car, but whether
+he will get a chance to show it remains to be seen, as Ott Tanak’s arrival at
+Hyundai makes the 3<sup>rd</sup> car situation something to look out for in the
+coming weeks.</p>
+<p class="c"><strong>Best Performance: </strong>Chile: 0,3 s/km (17 stages)</p>
+<p class="c"><strong>Worst Performance</strong>: CER: 0,76 s/km (17 stages)</p>
+<h3>6. Esapekka Lappi – 0,40 s/km – 138 stages</h3>
+<figure><div class="tile"><img loading="lazy" src="../../media/8151fb3cdfd7648d.webp" alt=""></div></figure>
+<p>Esapekka Lappi’s season was also a season
+of two halves. The Finn was the 4<sup>th</sup> fastest driver after Estonia,
+but he now finds himself in 6<sup>th</sup>. The Hyundai driver endured a
+miserable 2<sup>nd</sup> half, crashing out early on in Finland, Chile and CER.
+I wrote that Lappi seemed to be the ideal number 2 to Neuville for Hyundai, but
+this won’t be how the 2024 season will go for Lappi. He will do a part time
+season (his choice) sharing the 3<sup>rd</sup> car with other drivers. Lappi
+still has a lot of speed in him, that’s unquestionable, but 2023 was his chance
+at showing that he can regularly fight at the top, and he didn’t make the most
+out of it.</p>
+<p class="c"><strong>Best Performance: </strong>Mexico: 0,025 s/km (6 stages), a more representative one is
+Sardegna and Sweden where he was 0,25 s/km off</p>
+<p class="c"><strong>Worst Performance</strong>: Monte Carlo: 0,72 s/km (17 stages)</p>
+<h3>5. Ott Tanak – 0,37 s/km – 159 stages</h3>
+<figure><div class="tile"><img loading="lazy" src="../../media/5aa269fe8ae0411f.webp" alt=""></div></figure>
+<p>Tanak is certainly relieved that 2023 has
+come to an end. The Estonian is leaving M-Sport for Hyundai for the upcoming
+season and as far as I can tell he couldn’t be happier. Despite his two wins in
+Chile and Sweden, Tanak struggled in the Puma Rally1. He had many mechanical
+problems throughout the season, and in all honestly, he never looked like he
+got to grips with the car. There are still positives to take out from the
+season, but definitely not as many the 2019 champion would have wanted or
+expected when he signed his M-Sport deal.</p>
+<p class="c"><strong>Best Performance: </strong>Chile: 0,12 s/km (13 stages)</p>
+<p class="c"><strong>Worst Performance</strong>: Safari: 0,79 s/km (13 stages)</p>
+<h3>4. Elfyn Evans – 0,34 s/km – 171 stages</h3>
+<figure><div class="tile"><img loading="lazy" src="../../media/5c0a91b7521ca5b3.webp" alt=""></div></figure>
+<p>Just like I said after Estonia, Evans has
+his place in the final championship standings mostly because of his
+consistency. The Welshman ends the season in 2<sup>nd</sup>, with the join most
+wins in 2023, but yet none were a convincing performance. In Croatia all his
+rivals went out or suffered punctures, in Finland yes he was rapid, but one
+would suspect he wouldn’t have had the speed to match Kalle, and in Japan the
+rally was over after the morning loop of Friday. As harsh as this might sound,
+Evans is yet to fully regain his 2021 form with a Rally1 car. His 2<sup>nd</sup>
+half of the season was better than the first, but is still not where the
+Welshman would want to be I suspect.</p>
+<p class="c"><strong>Best Performance: </strong>Finland: 0,06 s/km (20 stages)</p>
+<p class="c"><strong>Worst Performance</strong>: Sardegna: 0,74 s/km (11 stages)</p>
+<h3>3. Thierry Neuville – 0,25 s/km – 188 stages</h3>
+<figure><div class="tile"><img loading="lazy" src="../../media/ca66f6c30cd315ad.webp" alt=""></div></figure>
+<p>Another
+season passed, and yet again Neuville has been close, but yet so far to the
+championship he so much desires. But this year is a little bit different.
+Neuville only made 2,5 mistakes this season, one being his off in the power
+stage in Sweden that cost him 3 or 4 points, the other is his off from the lead
+in Croatia, and the last is his off in Japan, which in fairness was in a rally
+where everything had been decided. Neuville showed pace in rallies that he
+hadn’t been fast before, namely all the fast gravel rallies, and also was hit
+with mechanical issues in Portugal, Safari and Acropolis. Next year will be
+more difficult for him with the arrival of his old foe Ott Tanak</p>
+<p class="c"><strong>Best Performance: </strong>Croatia and Finland: 0,18 s/km (13 stages and 20 stages)</p>
+<p class="c"><strong>Worst Performance</strong>: Safari: 0,52 s/km (10 stages)</p>
+<h3>2. Kalle Rovanpera – 0,23 s/km – 180 stages</h3>
+<figure><div class="tile"><img loading="lazy" src="../../media/7e8dea3058f924ea.webp" alt=""></div></figure>
+<p>For
+the 2<sup>nd</sup> year running, Kalle Rovanpera finds himself on top of the
+standings at the end of the season. The Finn’s 2<sup>nd</sup> title may have been
+less dominant than the first one, but it was just as impressive. Kalle showed
+great maturity in 2023, judging when to push rather than going flat out and
+risking a mistake. And when he decided to go for it, he was unbeatable. In
+Estonia he won 11 stages in a row (!!) for example. Kalle was the fastest and
+the most consistent out of the ones that did a full season, simple as. Lets see
+if he will go for title number three in 2024. (Update, he will not 😱)</p>
+<p class="c"><strong>Best
+Performance: </strong>Finland:
+0,02 s/km (6 stages)</p>
+<p class="c"><strong>Worst
+Performance: </strong>Sardegna:
+0,59 s/km (14 stages)</p>
+<h3>1. Sebastien Ogier – 0,19 s/km – 111 stages</h3>
+<figure><div class="tile"><img loading="lazy" src="../../media/f2d45516d0964413.webp" alt=""></div></figure>
+<p>Well
+well well… If it isn’t the 8 times World Champion Seb Ogier. Admittedly, Ogier is
+on the top of the list because he has the ability to choose the rally he
+competes in, but it’s still impressive that the Toyota driver is still up there
+with the full-time guys come the end of the season. Ogier won three rallies in
+2023, winning in Monte Carlo, Mexico and Safari. Ogier could have arguably won
+all the rallies he competed in this season but mistakes and punctures cost him
+in Croatia, CER, Sardegna and Acropolis. Despite not having competed in a full
+season since 2021, Ogier still appears to be on top of his game and is still a
+force to be reckoned with in the WRC.</p>
+<p class="c"><strong>Best
+Performance: </strong>Mexico:
+0,07 s/km (14 stages)</p>
+<p class="c"><strong>Worst
+Performance: </strong>Sardegna:
+0,36 s/km (14 stages)</p>
+<figure><div class="tile"><img loading="lazy" src="../../media/9b92ba2aad95d27b.webp" alt=""></div></figure>
+<figure><div class="tile"><img loading="lazy" src="../../media/c7123b3ee9415325.webp" alt=""></div></figure>
+<p><strong>On this table you can see everyone&#x27;s pace per rally with more detail.</strong></p>
+<p><strong>All the numbers are second per kilometre deficits to the &quot;ideal pace&quot;. The averages are calculated by multiplying the s/km deficit per rally with the stages that the driver completed in the rally, and adding them all together, and then divided by the total amount of stages the driver has competed in so far this season.</strong></p>
+<p><strong>By Dimitris Theodorou<br></strong><br></p>
+<p class="c">Massive thanks to eWRC, their s/km stat that&#x27;s there on each stage saved me a lot of time<br><br><br><strong>All pics are from the Red Bull Content Pool</strong></p>
+
+</div></div>
+</article>
+<aside class="side"><div class="frame"><h3>More: Stats Posts</h3><div class="rtable compact"><a class="rrow" href="../how-will-road-sweeping-affect-drivers-in-sardegna/"><span class="pos cell">1</span><div class="tile thumb"><img loading="lazy" src="../../media/t/d2275d73aa86f1d9.webp" alt=""></div><span class="name cell">How will road sweeping affect drivers in Sardegna? An Analysis</span></a><a class="rrow" href="../how-often-does-the-fastest-driver-actually-win-in-the-wrc/"><span class="pos cell">2</span><div class="tile thumb"><img loading="lazy" src="../../media/t/3324f4936fe58d5e.webp" alt=""></div><span class="name cell">How often does the fastest driver actually win in the WRC?</span></a><a class="rrow" href="../2025-the-wrc-season-in-numbers/"><span class="pos cell">3</span><div class="tile thumb"><img loading="lazy" src="../../media/t/90e5d2481ccccdf5.webp" alt=""></div><span class="name cell">2025: The WRC Season in Numbers</span></a><a class="rrow" href="../a-look-back-at-the-2025-erc-season/"><span class="pos cell">4</span><div class="tile thumb"><img loading="lazy" src="../../media/t/1b8917ee84e82f27.webp" alt=""></div><span class="name cell">A Look Back at the 2025 ERC Season</span></a><a class="rrow" href="../the-complete-story-of-the-r5-class/"><span class="pos cell">5</span><div class="tile thumb"><img loading="lazy" src="../../media/t/448f5dfcb785290a.webp" alt=""></div><span class="name cell">The R5 Class: The Story So Far</span></a><a class="rrow" href="../2017-wrc/"><span class="pos cell">6</span><div class="tile thumb"><img loading="lazy" src="../../media/t/dcbbffa4696ba624.webp" alt=""></div><span class="name cell">Powerslide Stats Centre: The Story of the 2017 WRC Season</span></a><a class="rrow" href="../r5-fiesta/"><span class="pos cell">7</span><div class="tile thumb"><img loading="lazy" src="../../media/t/50e341bf8e2f44ec.webp" alt=""></div><span class="name cell">The R5 Class: The Story So Far</span></a></div></div>
+<div class="frame"><h3>Latest</h3><div class="rtable compact"><a class="rrow" href="../../wrc-news/ford-returns-to-the-wrc-as-a-manufacturer/"><span class="pos cell">1</span><div class="tile thumb"><img loading="lazy" src="../../media/t/9edc068a5f75e8a3.webp" alt=""></div><span class="name cell">Ford Returns to the WRC as a Manufacturer</span></a><a class="rrow" href="../how-will-road-sweeping-affect-drivers-in-sardegna/"><span class="pos cell">2</span><div class="tile thumb"><img loading="lazy" src="../../media/t/d2275d73aa86f1d9.webp" alt=""></div><span class="name cell">How will road sweeping affect drivers in Sardegna? An Analysis</span></a><a class="rrow" href="../../wrc-route-previews/2026/rally-italia-sardegna-2026-the-stages/"><span class="pos cell">3</span><div class="tile thumb"><img loading="lazy" src="../../media/t/038217f6c9282ffc.webp" alt=""></div><span class="name cell">Rally Italia Sardegna 2026</span></a><a class="rrow" href="../../wrc-route-previews/2026/rally-chile-2026-the-stages/"><span class="pos cell">4</span><div class="tile thumb"><img loading="lazy" src="../../media/t/b096609882e97291.webp" alt=""></div><span class="name cell">Rally Chile 2026</span></a><a class="rrow" href="../../wrc-history/7-driver-team-combos-you-forgot/"><span class="pos cell">5</span><div class="tile thumb"><img loading="lazy" src="../../media/t/47c04709c30ce4b9.webp" alt=""></div><span class="name cell">7 Driver-Team Combos You Might Have Forgotten</span></a></div></div>
+<a class="cell gold" href="../../stats/" style="display:block;padding:18px 18px 16px;text-decoration:none"><b style="font:700 22px/1.1 var(--display);display:block">Powerslide WRC Stats Database</b><span style="font:400 15px/1.4 var(--display)">Seasons, rallies, drivers and stage-by-stage pace →</span></a>
+</aside>
+</div>
+<div class="shead"><h2 class="glitch" data-text="Read next"><span class="gtxt">Read next</span></h2><a class="more" href="../">See all ›</a></div>
+<div class="grid g3"><a class="card" href="../how-will-road-sweeping-affect-drivers-in-sardegna/"><div class="tile"><img loading="lazy" src="../../media/t/d2275d73aa86f1d9.webp" alt=""></div><div class="body cell"><span><span class="tag">Stats Posts</span></span><h3>How will road sweeping affect drivers in Sardegna? An Analysis</h3></div></a><a class="card" href="../how-often-does-the-fastest-driver-actually-win-in-the-wrc/"><div class="tile"><img loading="lazy" src="../../media/t/3324f4936fe58d5e.webp" alt=""></div><div class="body cell"><span><span class="tag">Stats Posts</span></span><h3>How often does the fastest driver actually win in the WRC?</h3></div></a><a class="card" href="../2025-the-wrc-season-in-numbers/"><div class="tile"><img loading="lazy" src="../../media/t/90e5d2481ccccdf5.webp" alt=""></div><div class="body cell"><span><span class="tag">Stats Posts</span></span><h3>2025: The WRC Season in Numbers</h3></div></a></div>
+</div></main>
+<div class="strip" style="height:40px"></div>
+<footer class="foot"><div class="foot-in"><div class="l">Powerslide Media</div>
+<div class="r"><b>Every stage, every corner<small>A blog about everything rallying — plus the Powerslide Podcast</small></b><div class="social"><a href="https://open.spotify.com/show/3cMr6pueXOe2v6hbXJKDdB" target="_blank" rel="noopener">Spotify</a><a href="https://podcasts.apple.com/ee/podcast/powerslide-podcast/id1675689813" target="_blank" rel="noopener">Apple Podcasts</a><a href="https://www.youtube.com/@powerslidepodcast" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/powerslidepodcast/" target="_blank" rel="noopener">Instagram</a><a href="https://twitter.com/PowerslideMedia" target="_blank" rel="noopener">X / Twitter</a></div></div></div></footer>
+<div class="low"><div class="low-in"><div class="l"></div><div class="r"><a href="../../wrc-news/">News</a><a href="../../wrc-route-previews/">Route Previews</a><a href="../../stats/">Stats Database</a><a href="../">Stats Posts</a><a href="../../wrc-history/">History</a><a href="../../rally-acropolis-posts/">Acropolis Rally Posts</a><a href="../../30-goat-wrc-stages/">Top 30 Stages</a><a href="../../concept-itineraries/">Concepts</a><a href="../../in-greek/">Ελληνικά</a><a href="../../about/">About</a><span class="cr">Powerslide Media 2026 – All rights reserved</span></div></div></div>
+<script src="../../assets/site.js?v=0da93d4d"></script>
+</body></html>
