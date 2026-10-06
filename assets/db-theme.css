@@ -133,3 +133,5 @@ html:root[data-theme="dark"] #pwdb [style*="color: rgb(45, 80, 22)"]:not([style*
 html:root[data-theme="dark"] #pwdb .pvr-heat-cell,html:root[data-theme="dark"] #pwdb .pvr-heat-cell small,
 html:root[data-theme="dark"] #pwdb .pw-r-pace{color:#fff!important;text-shadow:0 1px 2px rgba(0,0,0,.85)}
 html:root[data-theme="dark"] #pwdb .selected-driver-tag{background:#6e3a5a!important;color:#fff!important}
+/* Road Conditions mode is not published on the site */
+#pwdb #roadCondModeBtn,#pwdb #roadCondView{display:none!important}

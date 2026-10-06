@@ -116,8 +116,8 @@ if(window.Chart){applyChartJsTheme();}</script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
-<link rel="stylesheet" href="../assets/db-theme.css?v=8c3dd527">
-<script src="../assets/db-tiles.js?v=b88605b7"></script>
+<link rel="stylesheet" href="../assets/db-theme.css?v=0d0f4483">
+<script src="../assets/db-tiles.js?v=7e54a4d0"></script>
 </head>
 <body data-root="../">
 <canvas id="glow" aria-hidden="true"></canvas>
@@ -126,7 +126,7 @@ if(window.Chart){applyChartJsTheme();}</script>
 <div class="top-title"><div class="glitch" data-text="Stats Database"><span class="gtxt">Stats Database</span></div>
 <div class="top-tools"><button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to dark mode"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.7 14.3A8.5 8.5 0 0 1 9.7 3.3a8.5 8.5 0 1 0 11 11z"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.6" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 1.8v2.6M12 19.6v2.6M1.8 12h2.6M19.6 12h2.6M4.8 4.8l1.8 1.8M17.4 17.4l1.8 1.8M4.8 19.2l1.8-1.8M17.4 6.6l1.8-1.8"/></g></svg><span class="lbl">Dark</span></button><form class="search-form" action="../search/" role="search"><input name="q" placeholder="Search articles" aria-label="Search articles"><button>Go</button></form></div></div>
 </div></header>
-<nav class="strip" aria-label="Sections"><div class="nav"><a href="../">Home</a><a href="../wrc-news/">News</a><a href="../wrc-route-previews/">Route Previews</a><a href="../powerslide-stats-centre/">Stats Centre</a><a href="./" class=on aria-current=page>Stats Database</a><a href="../wrc-history/">History</a><a href="../rally-acropolis-posts/">Acropolis</a><a href="../route-history-of-the-acropolis-rally/">Acropolis History</a><a href="../30-goat-wrc-stages/">Top 30 Stages</a><a href="../concept-itineraries/">Concepts</a><a href="../in-greek/">Ελληνικά</a><a href="../about/">About</a></div></nav>
+<nav class="strip" aria-label="Sections"><div class="nav"><a href="../">Home</a><a href="../wrc-news/">News</a><a href="../wrc-route-previews/">Route Previews</a><a href="./" class=on aria-current=page>Stats Database</a><a href="../powerslide-stats-centre/">Stats Posts</a><a href="../wrc-history/">History</a><a href="../rally-acropolis-posts/">Acropolis Rally Posts</a><a href="../30-goat-wrc-stages/">Top 30 Stages</a><a href="../concept-itineraries/">Concepts</a><a href="../in-greek/">Ελληνικά</a><a href="../about/">About</a></div></nav>
 
 <main class="panel db-panel"><div class="wrap"><div id="pwdb">
 
@@ -198,7 +198,7 @@ if(window.Chart){applyChartJsTheme();}</script>
         </div>
         
             <div class="mode-btn" onclick="setMode('paceVsResult')" id="paceVsResultModeBtn" style="display:flex;align-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:8px;flex-shrink:0"><line x1="3" y1="3" x2="3" y2="21"/><line x1="3" y1="21" x2="21" y2="21"/><circle cx="7" cy="16" r="1.5" fill="currentColor"/><circle cx="11" cy="11" r="1.5" fill="currentColor"/><circle cx="15" cy="14" r="1.5" fill="currentColor"/><circle cx="19" cy="7" r="1.5" fill="currentColor"/><line x1="7" y1="16" x2="19" y2="7" stroke-dasharray="2 2"/></svg><span style="display:flex;flex-direction:column;align-items:flex-start;text-align:left;"><span>Pace vs Result</span><span style="font-size:0.7em;font-weight:400;opacity:0.65;letter-spacing:0;text-transform:none;margin-top:2px;">Does fastest pace = best result? Auto-updates with data</span></span></div>
-            <div class="mode-btn" onclick="setMode('roadConditions')" id="roadCondModeBtn" style="display:flex;align-items:center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:8px;flex-shrink:0"><path d="M5 21 9 3"/><path d="M19 21 15 3"/><path d="M12 4v2"/><path d="M12 10v3"/><path d="M12 17v4"/></svg><span style="display:flex;flex-direction:column;align-items:flex-start;text-align:left;"><span>Road Conditions</span><span style="font-size:0.7em;font-weight:400;opacity:0.65;letter-spacing:0;text-transform:none;margin-top:2px;">Road position s/km vs season average on rough gravel</span></span></div>
+            
 </div>
 
     <div id="seasonView">
@@ -6400,6 +6400,6 @@ try{if(window.__pwSeries){var b=document.getElementById('roadCondModeBtn');if(b)
 <div class="strip" style="height:40px"></div>
 <footer class="foot"><div class="foot-in"><div class="l">Powerslide Media</div>
 <div class="r"><b>Every stage, every corner<small>A blog about everything rallying — plus the Powerslide Podcast</small></b><div class="social"><a href="https://open.spotify.com/show/3cMr6pueXOe2v6hbXJKDdB" target="_blank" rel="noopener">Spotify</a><a href="https://podcasts.apple.com/ee/podcast/powerslide-podcast/id1675689813" target="_blank" rel="noopener">Apple Podcasts</a><a href="https://www.youtube.com/@powerslidepodcast" target="_blank" rel="noopener">YouTube</a><a href="https://www.instagram.com/powerslidepodcast/" target="_blank" rel="noopener">Instagram</a><a href="https://twitter.com/PowerslideMedia" target="_blank" rel="noopener">X / Twitter</a></div></div></div></footer>
-<div class="low"><div class="low-in"><div class="l"></div><div class="r"><a href="../wrc-news/">News</a><a href="../wrc-route-previews/">Route Previews</a><a href="../powerslide-stats-centre/">Stats Centre</a><a href="./">Stats Database</a><a href="../wrc-history/">History</a><a href="../rally-acropolis-posts/">Acropolis</a><a href="../route-history-of-the-acropolis-rally/">Acropolis History</a><a href="../30-goat-wrc-stages/">Top 30 Stages</a><a href="../concept-itineraries/">Concepts</a><a href="../in-greek/">Ελληνικά</a><a href="../about/">About</a><span class="cr">Powerslide Media 2026 – All rights reserved</span></div></div></div>
+<div class="low"><div class="low-in"><div class="l"></div><div class="r"><a href="../wrc-news/">News</a><a href="../wrc-route-previews/">Route Previews</a><a href="./">Stats Database</a><a href="../powerslide-stats-centre/">Stats Posts</a><a href="../wrc-history/">History</a><a href="../rally-acropolis-posts/">Acropolis Rally Posts</a><a href="../30-goat-wrc-stages/">Top 30 Stages</a><a href="../concept-itineraries/">Concepts</a><a href="../in-greek/">Ελληνικά</a><a href="../about/">About</a><span class="cr">Powerslide Media 2026 – All rights reserved</span></div></div></div>
 <script src="../assets/site.js?v=0da93d4d"></script>
 </body></html>
