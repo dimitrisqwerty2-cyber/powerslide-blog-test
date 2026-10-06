@@ -319,3 +319,22 @@ a{color:inherit}
   .low .l{display:none}.low .r{padding:14px 16px}.low .r .cr{margin-left:0}
   .side{grid-template-columns:minmax(0,1fr)}
 }
+
+/* Follow Powerslide! (round brand icons, like the Google Sites social links) */
+.follow{text-align:center;margin:44px 0 6px;padding-top:28px;border-top:2px solid var(--h-bg)}
+.follow h2{font:700 30px/1.15 var(--display);color:var(--ink-hl);margin:0 0 20px;border:0;background:none;padding:0}
+.follow .icons{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+.follow .icons a{width:56px;height:56px;border-radius:50%;background:var(--c);display:grid;place-items:center;
+  box-shadow:0 4px 0 var(--drop);transition:transform .15s,box-shadow .15s;text-decoration:none}
+.follow .icons a:hover{transform:translateY(-3px);box-shadow:0 7px 0 var(--drop)}
+.follow .icons img{width:44px;height:44px}
+.follow.compact{margin:0;padding:0;border:0}
+.follow.compact h2{font-size:20px;color:#fff;text-shadow:0 1px 0 rgba(0,30,24,.7);margin:2px 0 14px}
+.follow.compact .icons{gap:14px}
+.follow.compact .icons a{width:48px;height:48px}.follow.compact .icons img{width:38px;height:38px}
+
+/* comments (giscus) */
+.comments{margin-top:26px;padding-top:26px}
+.comments .ctitle{font:700 28px/1.1 var(--display);color:var(--ink-hl);margin:0 0 18px;padding:6px 0 6px 14px;border-left:6px solid var(--accent);
+  background:linear-gradient(90deg,var(--h-bg),var(--h-bg0) 70%)}
+.giscus-box{min-height:160px}
