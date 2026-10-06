@@ -2,26 +2,26 @@
    Loaded after the database's own CSS: it only re-points its colour tokens and restyles its components.
    Colours come from the site's tokens in site.css, so both themes follow automatically. */
 html:root,html:root[data-theme],html:root[data-theme="light"]{
-  --color-primary:#0a8a68; --color-primary-dark:#06664e; --color-primary-soft:rgba(240,197,19,.28);
+  --color-primary:#0a8a68; --color-primary-dark:#06664e; --color-primary-soft:rgba(245,169,28,.28);
   --color-secondary:#d2e8df; --color-bg:#e8f3ee; --color-surface:#f2f8f5; --color-surface-2:#e0eee8;
   --color-text:#2a2a2c; --color-text-light:#4a5e58; --color-border:rgba(0,48,40,.2);
   --color-border-subtle:rgba(0,48,40,.1); --color-border-strong:rgba(0,48,40,.22);
-  --color-accent:#b88a00; --chart-grid:rgba(42,42,44,.1); --chart-tick:#3f504b; --chart-tick-strong:#2a2a2c;
+  --color-accent:#b86e00; --chart-grid:rgba(42,42,44,.1); --chart-tick:#3f504b; --chart-tick-strong:#2a2a2c;
   --card-shadow:rgba(0,46,38,.3); --shadow-soft:0 5px 0 rgba(0,46,38,.55);
   --radius-sm:2px; --radius-md:2px; --radius-lg:2px; --radius-pill:2px;
   --font-body:"WRC Clean",Arial,sans-serif;
   --db-frame:linear-gradient(#f3f9f6,#e8f2ee); --db-chip:linear-gradient(#ffffff,#d9ece4); --db-stat:rgba(255,255,255,.45);
-  --db-row-alt:rgba(150,215,192,.2); --db-line:rgba(0,48,40,.12); --db-gold-text:#a87b00; --db-hover-cell:#fff3b0;
+  --db-row-alt:rgba(150,215,192,.2); --db-line:rgba(0,48,40,.12); --db-gold-text:#a86200; --db-hover-cell:#ffe3b0;
 }
 html:root[data-theme="dark"]{
-  --color-primary:#2fc28c; --color-primary-dark:#0a8a68; --color-primary-soft:rgba(240,197,19,.2);
+  --color-primary:#2fc28c; --color-primary-dark:#0a8a68; --color-primary-soft:rgba(245,169,28,.2);
   --color-secondary:#1f3a34; --color-bg:#141f1d; --color-surface:#1b2a27; --color-surface-2:#172421;
   --color-text:#e3f0eb; --color-text-light:#9fb6ae; --color-border:rgba(255,255,255,.13);
   --color-border-subtle:rgba(255,255,255,.06); --color-border-strong:rgba(255,255,255,.16);
-  --color-accent:#f0c513; --chart-grid:rgba(255,255,255,.08); --chart-tick:#b4c9c2; --chart-tick-strong:#e3f0eb;
+  --color-accent:#f5a91c; --chart-grid:rgba(255,255,255,.08); --chart-tick:#b4c9c2; --chart-tick-strong:#e3f0eb;
   --card-shadow:rgba(0,0,0,.5); --shadow-soft:0 5px 0 rgba(0,0,0,.6);
   --db-frame:linear-gradient(#1c2725,#161f1d); --db-chip:linear-gradient(#2e5a50,#21443c); --db-stat:rgba(0,0,0,.18);
-  --db-row-alt:rgba(255,255,255,.035); --db-line:rgba(255,255,255,.08); --db-gold-text:#f0c513; --db-hover-cell:#6a5222;
+  --db-row-alt:rgba(255,255,255,.035); --db-line:rgba(255,255,255,.08); --db-gold-text:#f5a91c; --db-hover-cell:#6a5222;
 }
 
 /* frame */
@@ -45,7 +45,7 @@ html:root[data-theme="dark"]{
   box-shadow:0 4px 0 var(--drop),inset 0 2px 0 var(--hi-strong)}
 #pwdb select option{background:var(--color-surface);color:var(--color-text)}
 #pwdb input::placeholder{color:var(--placeholder)}
-#pwdb input:focus,#pwdb select:focus{outline:2px solid #f0c513;outline-offset:1px}
+#pwdb input:focus,#pwdb select:focus{outline:2px solid #f5a91c;outline-offset:1px}
 
 /* buttons: mauve cells, gold on hover/active */
 #pwdb button{border-radius:0;font-family:var(--display);font-weight:700;letter-spacing:.02em}
@@ -91,7 +91,7 @@ html:root[data-theme="dark"]{
 #pwdb table th{background:var(--strip);color:#fff;font-family:var(--display);font-weight:700;border-color:var(--strip-edge)}
 #pwdb table td{border-color:var(--db-line)}
 #pwdb table tbody tr:nth-child(even) td{background:var(--db-row-alt)}
-#pwdb table tbody tr:hover td{background:rgba(240,197,19,.22)}
+#pwdb table tbody tr:hover td{background:rgba(245,169,28,.22)}
 
 /* site chrome: undo the database's global button rules on the header search and theme switch */
 .search-form button{border-radius:0;text-transform:none;letter-spacing:0;min-height:0;transform:none!important;box-shadow:none;
@@ -105,9 +105,9 @@ html:root[data-theme="dark"]{
 /* the database animates every <canvas> it finds; keep it off the site's own */
 .glitch canvas,#glow{animation:none!important;clip-path:none!important}
 /* sortable headers mark the active column with an inline colour: make that gold on the strip */
-#pwdb th[style*="color:var(--color-text)"],#pwdb th[style*="color: var(--color-text)"]{color:#fad623!important}
+#pwdb th[style*="color:var(--color-text)"],#pwdb th[style*="color: var(--color-text)"]{color:#fcbf2a!important}
 #pwdb th[style*="color:var(--color-text-light)"],#pwdb th[style*="color: var(--color-text-light)"]{color:#fff!important}
-#pwdb th [style*="color:var(--color-primary)"],#pwdb th[style*="color:var(--color-primary)"]{color:#fad623!important}
+#pwdb th [style*="color:var(--color-primary)"],#pwdb th[style*="color:var(--color-primary)"]{color:#fcbf2a!important}
 /* heat-map cells tint their background and text the same hue (made for the dark theme):
    light mode keeps the tint and inks the numbers; dark mode uses the database's own colours */
 html:root:not([data-theme="dark"]) #pwdb .pvr-heat-cell,html:root:not([data-theme="dark"]) #pwdb .pvr-heat-cell small{color:#1c1c1c!important}

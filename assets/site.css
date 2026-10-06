@@ -23,7 +23,7 @@
   --sep-edge:rgba(0,40,34,.8);
   --cell:linear-gradient(rgba(234,246,241,.9),rgba(208,235,225,.9) 55%,rgba(178,220,205,.9));
   --cell-solid:linear-gradient(#e8f5ef,#cfe9de 55%,#b2dccd);
-  --gold:linear-gradient(#fad623,#f0c513 60%,#ddb00b);
+  --gold:linear-gradient(#fcbf2a,#f5a91c 60%,#e2900e);
   --drop:rgba(0,46,38,.55);
   --tile-edge:rgba(0,22,18,.85);
   --gloss:linear-gradient(118deg,rgba(255,255,255,.30),rgba(255,255,255,.04) 42%,rgba(255,255,255,0) 43%,rgba(0,0,0,.28));
@@ -239,7 +239,7 @@ a{color:inherit}
 .cell.gold,.card:hover .body,.lead:hover .cap,.srow:hover .body,.pill:hover,
 .rrow:hover .pos,.rrow:hover .name,.rrow:hover .val,.rrow.hl .pos,.rrow.hl .name,.rrow.hl .val{
   --ink:#2a2a2c;--ink-hl:#1c1c1c;--ink-soft:#3d3440;--ink-mute:#5b4a5e;color:var(--ink)}
-.card:hover .tag{background:#2a2a2c;color:#fad623}
+.card:hover .tag{background:#2a2a2c;color:#fcbf2a}
 
 /* theme switch (header) */
 .theme-btn{display:inline-flex;align-items:center;gap:7px;border:0;cursor:pointer;font:700 14px/1 var(--display);color:var(--ink);
