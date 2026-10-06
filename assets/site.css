@@ -338,3 +338,35 @@ a{color:inherit}
 .comments .ctitle{font:700 28px/1.1 var(--display);color:var(--ink-hl);margin:0 0 18px;padding:6px 0 6px 14px;border-left:6px solid var(--accent);
   background:linear-gradient(90deg,var(--h-bg),var(--h-bg0) 70%)}
 .giscus-box{min-height:160px}
+
+/* homepage: three list columns, like the route-preview calendar */
+.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:40px;align-items:start}
+.frame.col{display:flex;flex-direction:column;height:100%}
+.frame.col .rtable{flex:1}
+.colmore{display:block;text-align:center;margin-top:16px}
+.frame.col .follow.compact{padding:6px 0}
+.frame.col .follow.compact h2{font-size:24px}
+/* podcast band: three listen buttons */
+.promo.pod{margin-top:30px}
+.promo.pod .gos{display:flex;background:var(--gold)}
+.promo.pod .gos .go{padding:0 22px;font-size:17px;border-left:2px solid rgba(0,0,0,.12)}
+.promo.pod .gos .go:first-child{border-left:0}
+.promo.pod .gos .go:hover{background:rgba(255,255,255,.25)}
+@media (max-width:1180px){.cols3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:980px){.promo.pod .gos .go{padding:14px 18px}}
+@media (max-width:640px){.cols3{grid-template-columns:minmax(0,1fr)}.promo.pod .gos{flex-wrap:wrap}.promo.pod .gos .go{flex:1;justify-content:center}}
+
+/* nav dropdowns (desktop: hover or keyboard focus; phones keep the scrolling row) */
+.nav .dd{position:relative;display:flex;flex:0 0 auto}
+.nav .caret{display:inline-block;width:0;height:0;margin-left:7px;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid currentColor;vertical-align:2px;opacity:.85}
+.nav .dd .menu{display:none;position:absolute;top:100%;left:0;min-width:250px;z-index:30;padding:6px 0;background:var(--cell-solid);
+  box-shadow:0 6px 0 var(--drop),0 14px 30px rgba(0,0,0,.25);border-top:3px solid var(--strip-edge)}
+.nav .dd .menu a{display:block;color:var(--ink);text-shadow:none;padding:10px 16px;font-size:15px;white-space:nowrap;border-radius:0}
+.nav .dd .menu a:hover,.nav .dd .menu a:focus{background:var(--gold);color:var(--on-gold)}
+@media (min-width:1101px){
+  .strip .nav{overflow:visible}
+  .nav .dd:hover .menu,.nav .dd:focus-within .menu{display:block}
+  .nav .dd:hover > a,.nav .dd:focus-within > a{background:rgba(255,255,255,.16)}
+  .nav .dd:hover > a.on,.nav .dd:focus-within > a.on{background:var(--gold)}
+}
+@media (max-width:1100px){.nav .caret{display:none}}
