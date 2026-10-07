@@ -379,3 +379,6 @@ a{color:inherit}
 .views{display:flex;justify-content:flex-end;margin-top:22px}
 .views span{display:inline-flex;align-items:center;gap:7px;font:700 14px/1 var(--display);padding:8px 11px 7px;background:var(--cell);color:var(--ink);box-shadow:0 3px 0 var(--drop),inset 0 2px 0 var(--hi)}
 .views svg{width:17px;height:17px;color:var(--accent)}
+.fullembed{position:relative;height:calc(100vh - 150px);min-height:520px;background:#141418;box-shadow:0 5px 0 var(--drop);outline:2px solid var(--tile-edge);outline-offset:-2px}
+.fullembed iframe{display:block;width:100%;height:100%;border:0}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
