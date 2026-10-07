@@ -6,6 +6,12 @@ window.__pwTiles=function(){
   var T=(document.body.getAttribute('data-root')||'')+'assets/tiles/';
   try{Object.keys(flagUrls).forEach(function(c){if(FLAGS.indexOf(c)>=0)flagUrls[c]=T+'flag_'+(c==='L\u03a4'?'lt':c.toLowerCase())+'.webp';});}catch(e){}
   try{Object.keys(manufacturerLogos).forEach(function(k){if(BADGES[k])manufacturerLogos[k]=T+'badge_'+BADGES[k]+'.webp';});}catch(e){}
+  /* rally flags are drawn as flagcdn.com images (profiles, rally pages): swap those for the same tiles */
+  var tiled={};FLAGS.forEach(function(c){tiled[c==='L\u03a4'?'lt':c.toLowerCase()]=1;});
+  function retile(root){if(!root||!root.querySelectorAll)return;var im=root.tagName==='IMG'?[root]:root.querySelectorAll('img[src*="flagcdn.com"]');
+    for(var i=0;i<im.length;i++){var m=(im[i].getAttribute('src')||'').match(/flagcdn\.com\/[wh]\d+\/([a-z]{2})\.(?:png|webp|jpg)$/);if(m&&tiled[m[1]])im[i].src=T+'flag_'+m[1]+'.webp';}}
+  var dbroot=document.getElementById('pwdb')||document.body;retile(dbroot);
+  if(window.MutationObserver)new MutationObserver(function(ms){ms.forEach(function(x){for(var j=0;j<x.addedNodes.length;j++)if(x.addedNodes[j].nodeType===1)retile(x.addedNodes[j]);});}).observe(dbroot,{childList:true,subtree:true});
   var sm=window.setMode;   /* Road Conditions is not published on the site */
   if(sm)window.setMode=function(m,x){return sm(m==='roadConditions'?'season':m,x);};
   /* the database's orange (0.6-0.9 s/km, 70-80 %) is too pale on light cells; same hue, darker in light mode (dark mode: see db-theme.css) */
