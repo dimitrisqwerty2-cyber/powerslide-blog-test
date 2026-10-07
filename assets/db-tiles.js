@@ -8,8 +8,6 @@ window.__pwTiles=function(){
   try{Object.keys(manufacturerLogos).forEach(function(k){if(BADGES[k])manufacturerLogos[k]=T+'badge_'+BADGES[k]+'.webp';});}catch(e){}
   var sm=window.setMode;   /* Road Conditions is not published on the site */
   if(sm)window.setMode=function(m,x){return sm(m==='roadConditions'?'season':m,x);};
-  var base=window.getManufacturerLogo;
-  if(base)window.getManufacturerLogo=function(car){return /\bgr\s*yaris\b/i.test(car||'')?T+'badge_gr.webp':base(car);};
   /* the database's orange (0.6-0.9 s/km, 70-80 %) is too pale on light cells; same hue, darker in light mode (dark mode: see db-theme.css) */
   ['getAveragePerformanceColor','getConsistencyColor'].forEach(function(n){var f=window[n];if(f)window[n]=function(v){var c=f(v);return (isLight()&&c==='#ff9800')?'#c96a00':c;};});
   if(window.Chart&&!window.__pwInk){window.__pwInk=1;Chart.register({id:'pwInk',beforeInit:ink,beforeUpdate:ink});}
