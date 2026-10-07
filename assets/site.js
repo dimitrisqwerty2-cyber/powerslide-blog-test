@@ -118,3 +118,17 @@
     if(f)f.contentWindow.postMessage({giscus:{setConfig:{theme:themeUrl()}}},'https://giscus.app');
   }).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 })();
+
+/* ---- views count (GoatCounter), bottom right of a post ---- */
+(function(){
+  var box=document.querySelector('.views[data-gc]');if(!box)return;
+  if(/^(localhost|127\.|\[::1\])/.test(location.hostname))return;
+  fetch(box.getAttribute('data-gc')+'/counter/'+encodeURIComponent(box.getAttribute('data-path'))+'.json')
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){
+      if(!d||!d.count)return;
+      var n=String(d.count).replace(/\s/g,'');
+      box.innerHTML='<span><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5c-1.7-4.4-6-7.5-11-7.5zm0 12.5a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-8a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>'+n+(n==='1'?' view':' views')+'</span>';
+      box.hidden=false;
+    }).catch(function(){});
+})();
