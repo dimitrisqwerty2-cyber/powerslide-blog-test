@@ -162,3 +162,28 @@ window.addEventListener('message',function(e){
     setInterval(check,400);   /* also catches scroll restoration and jumps that fire no scroll event */
   });
 })();
+
+/* ---- "Latest from X": load X's timeline only when the box is near the screen; keep the follow card unless it renders ---- */
+(function(){
+  var box=document.querySelector('.xfeed-box');if(!box)return;
+  function load(){
+    var live=document.createElement('div');live.className='xfeed-live';
+    var a=document.createElement('a');a.className='twitter-timeline';a.href='https://twitter.com/'+box.getAttribute('data-handle');
+    a.setAttribute('data-height','540');a.setAttribute('data-dnt','true');a.setAttribute('data-chrome','noheader nofooter noborders transparent');
+    a.setAttribute('data-theme',document.documentElement.getAttribute('data-theme')==='dark'?'dark':'light');a.textContent='';
+    live.appendChild(a);box.appendChild(live);
+    var s=document.createElement('script');s.async=true;s.src='https://platform.twitter.com/widgets.js';document.body.appendChild(s);
+    var tries=0,t=setInterval(function(){var f=live.querySelector('iframe');tries++;
+      if(f&&f.getBoundingClientRect().height>80){box.classList.add('has-live');clearInterval(t);}
+      else if(tries>40){clearInterval(t);live.remove();}},300);
+  }
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();load();}},{rootMargin:'400px'});io.observe(box);}
+  else load();
+})();
+
+/* ---- sticky sidebar taller than the screen: let it scroll until its bottom shows, then stick ---- */
+(function(){
+  var s=document.querySelector('.side');if(!s)return;
+  function fit(){s.style.top=Math.min(18,innerHeight-s.offsetHeight-18)+'px';}
+  fit();addEventListener('resize',fit);if(window.ResizeObserver)new ResizeObserver(fit).observe(s);
+})();

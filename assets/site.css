@@ -402,3 +402,18 @@ a{color:inherit}
   .scrolly-step{padding-bottom:26vh}
   .scrolly-card{opacity:1;padding:14px 14px 4px}
 }
+
+/* rows without a number cell (everything but route previews) */
+.rrow.nopos{grid-template-columns:92px minmax(0,1fr) auto}
+.rtable.compact .rrow.nopos{grid-template-columns:70px minmax(0,1fr)}
+@media (max-width:700px){.rrow.nopos{grid-template-columns:64px minmax(0,1fr)}}
+
+/* "Latest from X": a follow card, replaced by the timeline when X shows it (visitors logged into X) */
+.xfeed-card{display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px 12px;align-items:center;padding:14px;text-decoration:none;color:var(--ink)}
+.xfeed-card img{width:44px;height:44px;border-radius:50%}
+.xfeed-card b{display:block;font:700 18px/1.15 var(--display);color:var(--ink-hl)}
+.xfeed-card small{display:block;font:500 13px/1.35 var(--body);color:var(--ink-mute);margin-top:2px}
+.xfeed-btn{grid-column:1/-1;justify-self:start;font:700 14px/1 var(--display);padding:9px 12px;background:var(--gold);color:var(--on-gold);box-shadow:0 3px 0 var(--drop)}
+.xfeed-card:hover .xfeed-btn{filter:brightness(1.06)}
+.xfeed-live{max-height:560px;overflow:hidden;background:var(--paper-hi)}
+.xfeed-box.has-live .xfeed-card{display:none}
