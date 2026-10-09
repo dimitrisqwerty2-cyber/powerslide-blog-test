@@ -148,7 +148,7 @@ window.addEventListener('message',function(e){
     var fr=sec.querySelector('.scrolly-graphic iframe'),steps=[].slice.call(sec.querySelectorAll('.scrolly-step')),cur;
     function send(list){try{fr.contentWindow.postMessage({pwHighlight:list},'*');}catch(e){}}
     function check(){
-      var mid=innerHeight*0.6,act=null,sr=sec.getBoundingClientRect();
+      var mid=innerHeight*(innerWidth<=900?0.8:0.55),act=null,sr=sec.getBoundingClientRect();
       if(sr.top<mid&&sr.bottom>innerHeight*0.4){
         for(var i=steps.length-1;i>=0;i--){if(steps[i].querySelector('.scrolly-card').getBoundingClientRect().top<mid){act=steps[i];break;}}
       }

@@ -29,7 +29,7 @@
   --gloss:linear-gradient(118deg,rgba(255,255,255,.30),rgba(255,255,255,.04) 42%,rgba(255,255,255,0) 43%,rgba(0,0,0,.28));
   --divider:#6f6f75;
   --lcol:360px;            /* width of the logo column, the divider sits on its right edge */
-  --wrap:1280px;
+  --wrap:1440px;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -152,7 +152,7 @@ a{color:inherit}
 .frame h3::before{content:"";width:6px;height:20px;background:var(--gold)}
 
 /* ---------- two-column layouts ---------- */
-.split{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:30px;align-items:start}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:30px;align-items:start}
 .side{display:flex;flex-direction:column;gap:26px;position:sticky;top:18px}
 
 /* promo bands */
@@ -177,7 +177,7 @@ a{color:inherit}
 .byline{font:700 15px/1.2 var(--display);color:var(--ink-mute);display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .crumbs{display:flex;gap:6px;flex-wrap:wrap}
 .paper{background:var(--paper);color:var(--text);box-shadow:0 5px 0 var(--drop),inset 0 2px 0 var(--paper-hi);padding:34px 44px 40px;margin-top:30px}
-.prose{max-width:820px;margin:0 auto}
+.prose{max-width:940px;margin:0 auto}
 .prose p{margin:0 0 1.05em}
 .prose p.c{text-align:center}
 .prose a{color:var(--link);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
@@ -382,20 +382,23 @@ a{color:inherit}
 .fullembed{position:relative;height:calc(100vh - 150px);min-height:520px;background:#141418;box-shadow:0 5px 0 var(--drop);outline:2px solid var(--tile-edge);outline-offset:-2px}
 .fullembed iframe{display:block;width:100%;height:100%;border:0}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-/* ---- scrolling story: a pinned graphic with the text passing over it in cards (Post Builder "Pin") ---- */
-.prose .scrolly{position:relative;margin:1.6em 0}
-.scrolly-graphic{position:sticky;top:0;height:100vh;z-index:0;display:flex;align-items:center}
-.scrolly-frame{position:relative;width:100%;height:calc(100vh - 16px);box-shadow:0 5px 0 var(--drop);outline:2px solid var(--tile-edge);outline-offset:-2px;background:var(--paper-hi)}
+/* ---- scrolling story: a pinned graphic beside (desktop) or above (phones) the text, which scrolls past in cards;
+   the card being read lights up its drivers on the graphic (Post Builder "Pin" ... "Pin end") ---- */
+.prose .scrolly{position:relative;margin:1.6em 0;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:26px;align-items:start}
+.scrolly-graphic{grid-column:2;grid-row:1;position:sticky;top:0;height:100vh;display:flex;align-items:center}
+.scrolly-frame{position:relative;width:100%;height:min(calc(100vh - 24px),760px);box-shadow:0 5px 0 var(--drop);outline:2px solid var(--tile-edge);outline-offset:-2px;background:var(--paper-hi)}
 .scrolly-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.scrolly-steps{position:relative;z-index:1;margin-top:-100vh;padding:75vh 0 25vh}
-.scrolly-step{padding-bottom:70vh}
-.scrolly-step:last-child{padding-bottom:10vh}
-.scrolly-card{max-width:620px;margin:0 auto;padding:20px 26px 8px;background:var(--paper);box-shadow:0 5px 0 var(--drop),0 10px 30px rgba(0,0,0,.25),inset 0 2px 0 var(--paper-hi);border-left:6px solid var(--accent)}
+.scrolly-steps{grid-column:1;grid-row:1;padding:28vh 0 40vh}
+.scrolly-step{padding-bottom:38vh}
+.scrolly-step:last-child{padding-bottom:0}
+.scrolly-card{padding:18px 20px 6px;background:var(--paper);box-shadow:0 5px 0 var(--drop),inset 0 2px 0 var(--paper-hi);border-left:6px solid var(--accent);opacity:.45;transition:opacity .35s,border-color .35s}
 .scrolly-card > :first-child{margin-top:0}
-.scrolly-step.on .scrolly-card{border-left-color:#f5a91c}
-@media (max-width:700px){.scrolly-card{padding:16px 16px 4px}.scrolly-step{padding-bottom:60vh}}
-@media (min-width:901px){
-  .scrolly-step.side-l .scrolly-card{margin:0 auto 0 0;max-width:46%}
-  .scrolly-step.side-r .scrolly-card{margin:0 0 0 auto;max-width:46%}
-  .scrolly-step.wide .scrolly-card{max-width:100%}
+.scrolly-step.on .scrolly-card{opacity:1;border-left-color:#f5a91c}
+@media (max-width:900px){
+  .prose .scrolly{display:block}
+  .scrolly-graphic{height:56vh;z-index:3;background:var(--paper);padding:6px 0;box-sizing:border-box}
+  .scrolly-frame{height:100%}
+  .scrolly-steps{position:relative;z-index:1;padding:6vh 0 30vh}
+  .scrolly-step{padding-bottom:26vh}
+  .scrolly-card{opacity:1;padding:14px 14px 4px}
 }
