@@ -139,3 +139,26 @@ window.addEventListener('message',function(e){
   var frames=document.querySelectorAll('.embed iframe,.media iframe');
   for(var i=0;i<frames.length;i++){if(frames[i].contentWindow===e.source){var box=frames[i].parentNode;box.style.paddingTop='0';box.style.height=Math.ceil(h)+'px';break;}}
 });
+
+/* ---- scrolling story: the card crossing the middle of the screen tells the pinned chart which drivers to highlight;
+   the last one passed stays highlighted until the next card arrives, and leaving the section clears it ---- */
+(function(){
+  var secs=document.querySelectorAll('.scrolly');if(!secs.length)return;
+  [].forEach.call(secs,function(sec){
+    var fr=sec.querySelector('.scrolly-graphic iframe'),steps=[].slice.call(sec.querySelectorAll('.scrolly-step')),cur;
+    function send(list){try{fr.contentWindow.postMessage({pwHighlight:list},'*');}catch(e){}}
+    function check(){
+      var mid=innerHeight*0.6,act=null,sr=sec.getBoundingClientRect();
+      if(sr.top<mid&&sr.bottom>innerHeight*0.4){
+        for(var i=steps.length-1;i>=0;i--){if(steps[i].querySelector('.scrolly-card').getBoundingClientRect().top<mid){act=steps[i];break;}}
+      }
+      if(act===cur)return;cur=act;
+      steps.forEach(function(s){s.classList.toggle('on',s===act);});
+      var list=[];try{list=act?JSON.parse(act.getAttribute('data-hl')||'[]'):[];}catch(e){}
+      send(list);
+    }
+    addEventListener('scroll',check,{passive:true});addEventListener('resize',check);
+    fr.addEventListener('load',function(){cur=undefined;check();});check();
+    setInterval(check,400);   /* also catches scroll restoration and jumps that fire no scroll event */
+  });
+})();

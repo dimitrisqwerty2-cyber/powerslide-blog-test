@@ -228,7 +228,7 @@ html:root[data-theme="dark"] #pwdb [style^="color:#2d5016"],html:root[data-theme
 <script>[].forEach.call(document.querySelectorAll("img[data-tile]"),function(i){var n=i.getAttribute("data-tile");if(TILES[n])i.setAttribute("src",TILES[n]+"#assets/tiles/"+n);});</script>
 
 <script></script>
-<script>(function(){var last=0;function send(){var h=Math.ceil(document.documentElement.scrollHeight);if(Math.abs(h-last)<2)return;last=h;
+<script>(function(){if(/pinned/.test(location.hash))return;var last=0;function send(){var h=Math.ceil(document.documentElement.scrollHeight);if(Math.abs(h-last)<2)return;last=h;
 try{parent.postMessage({pwEmbedHeight:h},'*');}catch(e){}}
 if(window.ResizeObserver)new ResizeObserver(send).observe(document.body);addEventListener('load',send);setTimeout(send,300);})();</script>
 </body></html>

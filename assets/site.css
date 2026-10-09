@@ -382,3 +382,20 @@ a{color:inherit}
 .fullembed{position:relative;height:calc(100vh - 150px);min-height:520px;background:#141418;box-shadow:0 5px 0 var(--drop);outline:2px solid var(--tile-edge);outline-offset:-2px}
 .fullembed iframe{display:block;width:100%;height:100%;border:0}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* ---- scrolling story: a pinned graphic with the text passing over it in cards (Post Builder "Pin") ---- */
+.prose .scrolly{position:relative;margin:1.6em 0}
+.scrolly-graphic{position:sticky;top:0;height:100vh;z-index:0;display:flex;align-items:center}
+.scrolly-frame{position:relative;width:100%;height:calc(100vh - 16px);box-shadow:0 5px 0 var(--drop);outline:2px solid var(--tile-edge);outline-offset:-2px;background:var(--paper-hi)}
+.scrolly-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.scrolly-steps{position:relative;z-index:1;margin-top:-100vh;padding:75vh 0 25vh}
+.scrolly-step{padding-bottom:70vh}
+.scrolly-step:last-child{padding-bottom:10vh}
+.scrolly-card{max-width:620px;margin:0 auto;padding:20px 26px 8px;background:var(--paper);box-shadow:0 5px 0 var(--drop),0 10px 30px rgba(0,0,0,.25),inset 0 2px 0 var(--paper-hi);border-left:6px solid var(--accent)}
+.scrolly-card > :first-child{margin-top:0}
+.scrolly-step.on .scrolly-card{border-left-color:#f5a91c}
+@media (max-width:700px){.scrolly-card{padding:16px 16px 4px}.scrolly-step{padding-bottom:60vh}}
+@media (min-width:901px){
+  .scrolly-step.side-l .scrolly-card{margin:0 auto 0 0;max-width:46%}
+  .scrolly-step.side-r .scrolly-card{margin:0 0 0 auto;max-width:46%}
+  .scrolly-step.wide .scrolly-card{max-width:100%}
+}
