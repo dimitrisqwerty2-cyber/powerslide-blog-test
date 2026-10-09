@@ -132,3 +132,10 @@
       box.hidden=false;
     }).catch(function(){});
 })();
+
+/* ---- embedded segments (Stats Database charts/tables) report their height: size the frame to fit ---- */
+window.addEventListener('message',function(e){
+  var h=e.data&&e.data.pwEmbedHeight;if(!h||h<50||h>8000)return;
+  var frames=document.querySelectorAll('.embed iframe,.media iframe');
+  for(var i=0;i<frames.length;i++){if(frames[i].contentWindow===e.source){var box=frames[i].parentNode;box.style.paddingTop='0';box.style.height=Math.ceil(h)+'px';break;}}
+});

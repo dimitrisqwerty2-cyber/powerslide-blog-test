@@ -138,3 +138,5 @@ html:root[data-theme="dark"] #pwdb .selected-driver-tag{background:#0e6b55!impor
 /* more room between a chart and whatever follows it (e.g. the career pace table) */
 #pwdb div:has(> canvas) + div{margin-top:3rem!important}
 
+/* dark mode: the best-in-column cells (#2d5016 text on a light green tint) need the lifted green too */
+html:root[data-theme="dark"] #pwdb [style^="color:#2d5016"],html:root[data-theme="dark"] #pwdb [style*=";color:#2d5016"],html:root[data-theme="dark"] #pwdb [style*="; color:#2d5016"]{color:#8fdc6a!important}
