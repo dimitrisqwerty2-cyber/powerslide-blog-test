@@ -398,6 +398,10 @@ a{color:inherit}
 .ptable tr :is(td,th).k-red{background:linear-gradient(#e2493e,#b3261e);color:#fff}
 .ptable tr :is(td,th).k-blue{background:linear-gradient(#4182dc,#1f4f9a);color:#fff}
 .ptable tr :is(td,th).k-white{background:#fff;color:#1c1c1c}
+.ptable .ptile{display:inline-block;width:42px;height:29px;margin:-4px 0;vertical-align:middle;object-fit:cover;background:#202024;box-shadow:0 3px 0 var(--drop)}
+.ptable tr :is(td,th).ic{position:relative;padding-left:66px}
+.ptable .ic>.ptile{position:absolute;left:14px;top:50%;margin:-15px 0 0}
+@media (max-width:600px){.ptable tr :is(td,th).ic{padding-left:59px}.ptable .ic>.ptile{left:9px}}
 @media (max-width:600px){.ptable{font-size:15px}.ptable td,.ptable th{padding:7px 9px 6px}}
 .prose hr{border:0;height:6px;margin:1.8em 0;background:var(--strip);box-shadow:0 3px 0 var(--drop)}
 .views{display:flex;justify-content:flex-end;margin-top:22px}
