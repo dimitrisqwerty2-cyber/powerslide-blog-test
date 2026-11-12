@@ -187,3 +187,119 @@ window.addEventListener('message',function(e){
   function fit(){s.style.top=Math.min(18,innerHeight-s.offsetHeight-18)+'px';}
   fit();addEventListener('resize',fit);if(window.ResizeObserver)new ResizeObserver(fit).observe(s);
 })();
+
+/* ---- article extras: reading bar, back to top, things sliding in, counting numbers, photo stories, chapter menu,
+   full-screen photos. Markup comes from build.py (native_graphic, long-read layout); styles are at the end of site.css. ---- */
+(function(){
+  var prose=document.querySelector('article .prose');
+  var calm=false;try{calm=matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+  var hasIO='IntersectionObserver' in window;
+
+  /* reading bar + back to top (posts only), and the long-read cover drifting slower than the page */
+  if(prose){
+    var art=prose.closest('article');
+    var bar=document.createElement('div');bar.className='readbar';bar.setAttribute('aria-hidden','true');bar.innerHTML='<i></i>';document.body.appendChild(bar);
+    var up=document.createElement('button');up.className='totop';up.type='button';up.setAttribute('aria-label','Back to top');up.textContent='↑';document.body.appendChild(up);
+    up.onclick=function(){scrollTo({top:0,behavior:calm?'auto':'smooth'});};
+    var hero=document.querySelector('.lr-hero>img'),queued=false;
+    var paint=function(){
+      queued=false;
+      var r=art.getBoundingClientRect(),span=r.height-innerHeight;
+      bar.style.setProperty('--p',span>0?Math.min(1,Math.max(0,-r.top/span)).toFixed(4):0);
+      up.classList.toggle('on',(window.pageYOffset||0)>innerHeight*1.2);
+      if(hero&&!calm){var h=hero.parentNode.getBoundingClientRect();if(h.bottom>0&&h.top<innerHeight)hero.style.transform='translateY('+Math.max(-40,Math.min(40,-h.top*0.12)).toFixed(1)+'px)';}
+    };
+    var ask=function(){if(!queued){queued=true;requestAnimationFrame(paint);}};
+    addEventListener('scroll',ask,{passive:true});addEventListener('resize',ask);paint();
+  }
+
+  /* slide in: only things still below the screen when the page opens, so nothing visible ever blinks */
+  if(!calm&&hasIO){
+    var sel='.prose figure,.prose .pquote,.prose .ptable-wrap,.pstat,.prank .rrow,.pcallout,.pc-row,.ptimeline li,.pgallery a,.psplit,.chapter-cap,.grid .card,.bigfour .card,.cols3 .frame,.srow';
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){
+      if(!e.isIntersecting)return;io.unobserve(e.target);var el=e.target;el.classList.add('in');
+      setTimeout(function(){el.classList.remove('rv','in');el.style.removeProperty('--rd');},1700);
+    });},{rootMargin:'0px 0px -7% 0px'});
+    var seen=new Map();
+    [].forEach.call(document.querySelectorAll(sel),function(el){
+      if(el.closest('.scrolly,.story,#pwdb'))return;
+      var r=el.getBoundingClientRect();if(r.top<innerHeight*0.95)return;
+      var key=el.parentNode.nodeName+Math.round((r.top+(window.pageYOffset||0))/40),n=seen.get(key)||0;seen.set(key,n+1);   // neighbours on one line come in one after another
+      if(n)el.style.setProperty('--rd',Math.min(n,5)*80+'ms');
+      el.classList.add('rv');io.observe(el);
+    });
+  }
+
+  /* big numbers count up once ("1,234 km", "62.5%"); the text around the number stays */
+  if(!calm&&hasIO){
+    var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){cio.unobserve(e.target);e.target._run();}});},{threshold:.6});
+    [].forEach.call(document.querySelectorAll('[data-count]'),function(el){
+      var txt=el.textContent;if(txt.indexOf(':')>=0)return;
+      var m=txt.match(/\d[\d.,  ]*\d|\d/);if(!m)return;
+      var raw=m[0],grp=/^\d{1,3}([.,  ]\d{3})+$/.test(raw),sep=grp?raw.match(/[.,  ]/)[0]:'';
+      var dm=!grp&&raw.match(/^(\d+)([.,])(\d+)$/),val=grp?+raw.replace(/\D/g,''):dm?parseFloat(dm[1]+'.'+dm[3]):parseFloat(raw);
+      if(!isFinite(val)||!val)return;
+      var fmt=function(v){var s;if(dm)s=v.toFixed(dm[3].length).replace('.',dm[2]);else{s=String(Math.round(v));if(grp)s=s.replace(/\B(?=(\d{3})+$)/g,sep);}return txt.replace(raw,s);};
+      el.textContent=fmt(0);
+      el._run=function(){var t0=performance.now(),dur=1200;(function step(t){var k=Math.min(1,Math.max(0,(t-t0)/dur)),e=1-Math.pow(1-k,3);el.textContent=k<1?fmt(val*e):txt;if(k<1)requestAnimationFrame(step);})(t0);};
+      cio.observe(el);
+    });
+  }
+
+  /* photo story: the text block nearest the middle of the screen picks the pinned photo */
+  [].forEach.call(document.querySelectorAll('.story'),function(sec){
+    var imgs=sec.querySelectorAll('.story-media img'),steps=[].slice.call(sec.querySelectorAll('.story-step')),cur=-1;
+    if(!steps.length)return;
+    var check=function(){
+      var mid=innerHeight*0.62,act=0;
+      for(var i=steps.length-1;i>=0;i--){if(steps[i].getBoundingClientRect().top<mid){act=i;break;}}
+      if(act===cur)return;cur=act;
+      steps.forEach(function(s,i){s.classList.toggle('on',i===act);});
+      var m=+steps[act].getAttribute('data-m')||0;[].forEach.call(imgs,function(im,i){im.classList.toggle('on',i===m);});
+    };
+    addEventListener('scroll',check,{passive:true});addEventListener('resize',check);check();
+  });
+
+  /* long read: the chapter menu marks the chapter being read */
+  var nav=document.querySelector('.lr-nav');
+  if(nav){
+    var links=[].slice.call(nav.querySelectorAll('a')),box=nav.querySelector('.lr-nav-in');
+    var secs=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1));});
+    var mark=function(){
+      var act=-1;secs.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<innerHeight*0.45)act=i;});
+      links.forEach(function(a,i){
+        if(i===act&&!a.classList.contains('on')){a.classList.add('on');box.scrollLeft=Math.max(0,a.offsetLeft-60);}
+        else if(i!==act)a.classList.remove('on');
+      });
+    };
+    addEventListener('scroll',mark,{passive:true});mark();
+  }
+
+  /* photos open full screen: every photo of the post is one set (arrow keys, Esc) */
+  var shots=[].slice.call(document.querySelectorAll('article .prose figure img,.pgallery a')).filter(function(el){
+    return el.tagName==='A'||(!el.closest('a')&&!el.closest('.story,.scrolly'));});
+  if(shots.length){
+    var lb=null,at=0;
+    var info=function(el){
+      if(el.tagName==='A')return{src:el.href,cap:el.getAttribute('data-cap')||''};
+      var f=el.closest('figure'),c=f&&f.querySelector('figcaption');return{src:el.currentSrc||el.src,cap:c?c.textContent:''};
+    };
+    var show=function(i){at=(i+shots.length)%shots.length;var x=info(shots[at]);lb.querySelector('img').src=x.src;lb.querySelector('p').textContent=x.cap;};
+    var key=function(e){if(e.key==='Escape')close();else if(e.key==='ArrowRight')show(at+1);else if(e.key==='ArrowLeft')show(at-1);};
+    var close=function(){if(!lb)return;var old=lb;lb=null;old.classList.remove('on');document.removeEventListener('keydown',key);setTimeout(function(){old.remove();},220);};
+    var open=function(i){
+      lb=document.createElement('div');lb.className='lbox';lb.setAttribute('role','dialog');lb.setAttribute('aria-label','Photo');
+      lb.innerHTML='<img alt=""><p></p><button class="x" type="button" aria-label="Close">✕</button>'+(shots.length>1?'<button class="pv" type="button" aria-label="Previous photo">‹</button><button class="nx" type="button" aria-label="Next photo">›</button>':'');
+      lb.addEventListener('click',function(e){
+        if(e.target.classList.contains('pv'))show(at-1);else if(e.target.classList.contains('nx'))show(at+1);
+        else if(e.target.tagName!=='IMG')close();
+      });
+      document.body.appendChild(lb);show(i);document.addEventListener('keydown',key);
+      requestAnimationFrame(function(){if(lb)lb.classList.add('on');});
+    };
+    shots.forEach(function(el,i){
+      if(el.tagName==='IMG')el.classList.add('zoom');
+      el.addEventListener('click',function(e){e.preventDefault();open(i);});
+    });
+  }
+})();
