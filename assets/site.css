@@ -450,8 +450,6 @@ a{color:inherit}
    Post graphics, long reads and motion (Post Builder blocks; markup from native_graphic in build.py,
    behaviour in site.js "article extras"). Everything uses the site's own cells, strips and gold.
    ================================================================================================ */
-@view-transition{navigation:auto}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.22s}
 .prose h2,.prose h3,.card h3,.ahead h1,.lead h2{text-wrap:balance}
 .prose p{text-wrap:pretty}
 .prose :is(h2,h3,h4),.chapter{scroll-margin-top:64px}
@@ -646,4 +644,93 @@ a{color:inherit}
   .prose.lr-prose>:is(p,ul,ol){font-size:17.33px;line-height:1.65}
   .prose.lr-prose>p.lede,.prose p.lede{font-size:19px}
   .lr-prose figure.bleed figcaption,.lr-paper .views{padding-left:16px;padding-right:16px}
+}
+
+/* ================================================================================================
+   Motion pack (2026-11-14), borrowed from other sites and done in the site's own cells and gold:
+   rotating hero with a segmented timer (WRC.com / Netflix / Apple TV), slow photo push-in (broadcast Ken Burns),
+   caption wiping in like a TV lower third, photo tilt + glare on hover (Apple TV cards), list rows filling in
+   one by one like a results tower, section titles glitching in, card photo flying into the article on click
+   (cross-page view transition). Behaviour in site.js "motion pack". Everything stops for reduced motion.
+   ================================================================================================ */
+.leads{position:relative;display:grid;min-width:0}
+.leads>.lead{grid-area:1/1;min-width:0}
+.leads>.lead:not(.on){opacity:0;visibility:hidden;pointer-events:none}
+.leads>.lead.on{z-index:1}
+.hdots{position:absolute;z-index:3;left:18px;right:18px;top:16px;display:flex;gap:6px;pointer-events:none}
+.hdots button{pointer-events:auto;flex:1;max-width:64px;height:16px;padding:6px 0;border:0;background:none;cursor:pointer}
+.hdots button i{display:block;height:4px;background:rgba(255,255,255,.38);box-shadow:0 1px 2px rgba(0,0,0,.45);overflow:hidden;position:relative}
+.hdots button i::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#fcbf2a,#f5a91c);transform-origin:0 50%;transform:scaleX(0)}
+.hdots button.done i::after{transform:none}
+.hdots button.on i::after{transform:none}
+.srow{position:relative}
+.srow .body{position:relative}
+.srow .prog{position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#fcbf2a,#e2900e);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+.srow.on .body::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(#fcbf2a,#e2900e)}
+.srow.on h3{color:var(--ink-hl)}
+.hero:not(.play) .srow .prog{display:none}
+
+@media (prefers-reduced-motion:no-preference){
+  .leads>.lead{transition:opacity .7s ease,visibility 0s linear .7s}
+  .leads>.lead.on{transition:opacity .7s ease,visibility 0s}
+  .leads>.lead .tile img{transform-origin:62% 42%}
+  .leads.play>.lead.on .tile img{animation:psKen 9s ease-out both}
+  .leads.play>.lead.on .cap{animation:psWipe .6s cubic-bezier(.2,.7,.2,1) .15s both}
+  .leads.play .hdots button.on i::after{animation:psFill var(--slide,7s) linear both}
+  .hero.play .srow.on .prog{animation:psFill var(--slide,7s) linear both}
+  .leads.hold .hdots button.on i::after,.hero.hold .srow.on .prog,.leads.hold>.lead.on .tile img{animation-play-state:paused}
+  @keyframes psKen{from{transform:scale(1)}to{transform:scale(1.075)}}
+  @keyframes psWipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+  @keyframes psFill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+  /* photo tilt + glare (mouse only) */
+  .tilt .tile{transition:transform .5s cubic-bezier(.2,.7,.2,1);transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+  .tilt.tilting .tile{transition:transform .08s linear}
+  .tilt .tile::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .35s;
+    background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.28),rgba(255,255,255,0) 60%)}
+  .tilt.tilting .tile::before{opacity:1}
+
+  /* list rows fill in one after another when their box arrives */
+  .frame.rv .rrow{opacity:0;transform:translateX(-18px)}
+  .frame.rv.in .rrow{opacity:1;transform:none;transition:opacity .35s ease,transform .45s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--rd,0ms) + 140ms + var(--ri,0)*55ms)}
+  .rtable .rrow:nth-child(2){--ri:1}.rtable .rrow:nth-child(3){--ri:2}.rtable .rrow:nth-child(4){--ri:3}.rtable .rrow:nth-child(5){--ri:4}
+  .rtable .rrow:nth-child(6){--ri:5}.rtable .rrow:nth-child(7){--ri:6}.rtable .rrow:nth-child(8){--ri:7}.rtable .rrow:nth-child(9){--ri:8}
+  .rtable .rrow:nth-child(10){--ri:9}.rtable .rrow:nth-child(11){--ri:10}.rtable .rrow:nth-child(n+12){--ri:11}
+  .frame.rv h3::before{transform:scaleY(0);transform-origin:50% 100%}
+  .frame.rv.in h3::before{transform:none;transition:transform .4s cubic-bezier(.2,.7,.2,1) calc(var(--rd,0ms) + 80ms)}
+
+  /* section titles glitch in */
+  .shead.rv.in .glitch{animation:psGlitch .55s steps(1) .12s both}
+  @keyframes psGlitch{
+    0%{clip-path:inset(0 0 62% 0);transform:translateX(-10px)}
+    18%{clip-path:inset(38% 0 22% 0);transform:translateX(7px)}
+    36%{clip-path:inset(8% 0 48% 0);transform:translateX(-5px)}
+    54%{clip-path:inset(66% 0 0 0);transform:translateX(4px)}
+    72%{clip-path:inset(0 0 12% 0);transform:translateX(-2px)}
+    100%{clip-path:inset(0);transform:none}}
+}
+/* no page-change animations (cross-fade / photo morph): the user found them awkward, 2026-11-14 */
+
+/* ---- share buttons (articles: under the title and at the end; Stats Database: the view on screen) ---- */
+.share{display:flex;align-items:center;flex-wrap:wrap;gap:7px}
+.share-lab{font:700 13px/1 var(--display);text-transform:uppercase;letter-spacing:.06em;color:var(--ink-mute);margin-right:3px}
+.share .sh{display:inline-flex;align-items:center;justify-content:center;gap:7px;height:36px;min-width:36px;padding:0 9px;border:0;cursor:pointer;
+  background:var(--strip);color:#fff;text-decoration:none;font:700 14px/1 var(--display);box-shadow:0 3px 0 var(--drop),inset 0 1px 0 rgba(255,255,255,.25)}
+.share .sh svg{width:18px;height:18px;flex-shrink:0}
+.share .sh span{white-space:nowrap}
+.share .sh:hover,.share .sh:focus-visible,.share .sh.ok{background:var(--gold);color:var(--on-gold)}
+.share .sh:active{transform:translateY(2px);box-shadow:0 1px 0 var(--drop)}
+.share .sh[hidden]{display:none}
+.share-top{margin-top:4px}
+.share-top .sh.copy span{display:none}
+.share-end{margin:30px 0 6px;padding:14px 16px;background:var(--band-top);box-shadow:0 5px 0 var(--drop),inset 0 2px 0 var(--hi-strong);border-left:8px solid #f5a91c}
+.share-end .share-lab{font-size:17px;color:var(--ink-hl);letter-spacing:.02em;text-transform:none;margin-right:8px;flex-basis:auto}
+.share-db{margin:0 0 14px;justify-content:flex-end}
+.share-db .share-lab{color:var(--ink-hl)}
+.lr-hero-cap .share-lab{color:inherit;opacity:.8}
+@media (max-width:700px){
+  .share .sh{height:40px;min-width:40px}
+  .share-end{padding:12px}
+  .share-end .share-lab{flex-basis:100%;margin-bottom:4px}
+  .share-db{justify-content:flex-start}
 }

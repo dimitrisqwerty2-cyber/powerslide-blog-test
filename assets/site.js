@@ -215,7 +215,7 @@ window.addEventListener('message',function(e){
 
   /* slide in: only things still below the screen when the page opens, so nothing visible ever blinks */
   if(!calm&&hasIO){
-    var sel='.prose figure,.prose .pquote,.prose .ptable-wrap,.pstat,.prank .rrow,.pcallout,.pc-row,.ptimeline li,.pgallery a,.psplit,.chapter-cap,.grid .card,.bigfour .card,.cols3 .frame,.srow';
+    var sel='.shead,.prose figure,.prose .pquote,.prose .ptable-wrap,.pstat,.prank .rrow,.pcallout,.pc-row,.ptimeline li,.pgallery a,.psplit,.chapter-cap,.grid .card,.bigfour .card,.cols3 .frame,.srow';
     var io=new IntersectionObserver(function(es){es.forEach(function(e){
       if(!e.isIntersecting)return;io.unobserve(e.target);var el=e.target;el.classList.add('in');
       setTimeout(function(){el.classList.remove('rv','in');el.style.removeProperty('--rd');},1700);
@@ -302,4 +302,92 @@ window.addEventListener('message',function(e){
       el.addEventListener('click',function(e){e.preventDefault();open(i);});
     });
   }
+})();
+
+/* ---- motion pack: rotating hero, photo tilt, card photo flying into the article. Styles at the end of site.css. ---- */
+(function(){
+  var calm=false;try{calm=matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+
+  /* hero: the lead story turns over every 7 s through the top five; the matching row on the right fills a gold bar.
+     Stops while the mouse or keyboard focus is on it and while the tab is hidden; never runs for reduced motion. */
+  var box=document.querySelector('.leads[data-rotate]');
+  if(box){
+    var hero=box.closest('.hero'),slides=[].slice.call(box.querySelectorAll('.lead')),dots=[].slice.call(box.querySelectorAll('.hdots button'));
+    var rows=hero?[].slice.call(hero.querySelectorAll('.srow[data-slide]')):[];
+    var at=0,timer=null,DUR=7000,left=DUR,started=0,held=false;
+    var load=function(el){var im=el.querySelector('img[data-src]');if(im){im.src=im.getAttribute('data-src');im.removeAttribute('data-src');}};
+    var show=function(i){
+      at=(i+slides.length)%slides.length;load(slides[at]);load(slides[(at+1)%slides.length]);
+      slides.forEach(function(s,k){var on=k===at;s.classList.toggle('on',on);
+        if(on){s.removeAttribute('aria-hidden');s.removeAttribute('tabindex');}else{s.setAttribute('aria-hidden','true');s.setAttribute('tabindex','-1');}
+        if(on){var a=s.querySelectorAll('.tile img,.cap');[].forEach.call(a,function(x){x.style.animation='none';x.offsetWidth;x.style.animation='';});}});
+      dots.forEach(function(d,k){d.classList.toggle('on',k===at);d.classList.toggle('done',k<at);var f=d.querySelector('i');f.style.animation='none';f.offsetWidth;f.style.animation='';});
+      rows.forEach(function(r){var on=+r.getAttribute('data-slide')===at;r.classList.toggle('on',on);var g=r.querySelector('.prog');if(g){g.style.animation='none';g.offsetWidth;g.style.animation='';}});
+      left=DUR;
+    };
+    var tick=function(){clearTimeout(timer);started=Date.now();timer=setTimeout(function(){show(at+1);tick();},left);};
+    var hold=function(on){
+      if(on===held)return;held=on;box.classList.toggle('hold',on);if(hero)hero.classList.toggle('hold',on);
+      if(on){clearTimeout(timer);left=Math.max(400,left-(Date.now()-started));}else tick();
+    };
+    dots.forEach(function(d,k){d.addEventListener('click',function(e){e.preventDefault();show(k);if(!held)tick();});});
+    if(!calm&&slides.length>1){
+      box.style.setProperty('--slide',DUR+'ms');if(hero)hero.style.setProperty('--slide',DUR+'ms');
+      box.classList.add('play');if(hero)hero.classList.add('play');
+      show(0);tick();
+      [box].concat(rows).forEach(function(el){
+        el.addEventListener('mouseenter',function(){hold(true);});el.addEventListener('mouseleave',function(){hold(false);});});
+      box.addEventListener('focusin',function(){hold(true);});box.addEventListener('focusout',function(){hold(false);});
+      rows.forEach(function(r){r.addEventListener('focus',function(){show(+r.getAttribute('data-slide'));hold(true);});r.addEventListener('blur',function(){hold(false);});});
+      document.addEventListener('visibilitychange',function(){hold(document.hidden);});
+      /* hovering a row on the right brings its story up in the big slot; mousemove, not mouseenter, so a cursor
+         already resting there when the page appears doesn't switch the story by itself */
+      rows.forEach(function(r){r.addEventListener('mousemove',function(){var k=+r.getAttribute('data-slide');if(k!==at)show(k);});});
+    }else{dots.forEach(function(d){d.hidden=true;});}
+  }
+
+  /* photo tilt + glare on cards (mouse only) */
+  var fine=false;try{fine=matchMedia('(hover: hover) and (pointer: fine)').matches;}catch(e){}
+  if(!calm&&fine){
+    [].forEach.call(document.querySelectorAll('.card,.leads .lead'),function(c){
+      if(c.closest('#pwdb'))return;var t=c.querySelector('.tile');if(!t)return;c.classList.add('tilt');var q=false,ev=null;
+      var paint=function(){q=false;var r=t.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width,y=(ev.clientY-r.top)/r.height;
+        if(x<0||x>1||y<0||y>1)return;var big=r.width>600?2.2:4.5;
+        c.style.setProperty('--ry',((x-.5)*big).toFixed(2)+'deg');c.style.setProperty('--rx',((.5-y)*big).toFixed(2)+'deg');
+        c.style.setProperty('--gx',(x*100).toFixed(1)+'%');c.style.setProperty('--gy',(y*100).toFixed(1)+'%');};
+      c.addEventListener('pointermove',function(e){ev=e;c.classList.add('tilting');if(!q){q=true;requestAnimationFrame(paint);}});
+      c.addEventListener('pointerleave',function(){c.classList.remove('tilting');c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg');});
+    });
+  }
+
+})();
+
+/* ---- share buttons: social links built from the live address (so the Stats Database shares the view on screen),
+   copy link, and the phone's own share sheet where the browser has one ---- */
+(function(){
+  var T={x:'https://x.com/intent/post?url={u}&text={t}&via=PowerslideMedia',facebook:'https://www.facebook.com/sharer/sharer.php?u={u}',
+         whatsapp:'https://wa.me/?text={t}%20{u}',reddit:'https://www.reddit.com/submit?url={u}&title={t}'};
+  function info(bar){
+    var url=bar.hasAttribute('data-live')?location.href:bar.getAttribute('data-url');
+    return {url:url,title:bar.hasAttribute('data-live')?document.title:bar.getAttribute('data-title')};
+  }
+  var canShare=!!navigator.share;var coarse=false;try{coarse=matchMedia('(pointer: coarse)').matches;}catch(e){}
+  function prep(root){[].forEach.call((root||document).querySelectorAll('.share .sh.native'),function(b){b.hidden=!(canShare&&coarse);});}
+  prep();
+  document.addEventListener('click',function(e){
+    var el=e.target.closest&&e.target.closest('.share .sh');if(!el)return;
+    var bar=el.closest('.share'),x=info(bar),net=el.getAttribute('data-net');
+    if(net&&T[net]){el.href=T[net].replace('{u}',encodeURIComponent(x.url)).replace('{t}',encodeURIComponent(x.title));return;}
+    if(el.classList.contains('native')){e.preventDefault();navigator.share({title:x.title,url:x.url}).catch(function(){});return;}
+    if(el.hasAttribute('data-copy')){
+      e.preventDefault();
+      var done=function(){var sp=el.querySelector('span'),old=sp?sp.textContent:'';el.classList.add('ok');if(sp)sp.textContent='Copied!';
+        el.setAttribute('aria-label','Link copied');setTimeout(function(){el.classList.remove('ok');if(sp)sp.textContent=old;el.setAttribute('aria-label','Copy link');},1800);};
+      if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(x.url).then(done,function(){window.prompt('Copy this link:',x.url);});
+      else{var ta=document.createElement('textarea');ta.value=x.url;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+        try{document.execCommand('copy');done();}catch(err){window.prompt('Copy this link:',x.url);}ta.remove();}
+    }
+  });
+  /* the Stats Database adds its bar after start-up */
+  if(document.getElementById('pwdb')&&window.MutationObserver){var mo=new MutationObserver(function(){var b=document.querySelector('.share-db');if(b){prep(b.parentNode);mo.disconnect();}});mo.observe(document.getElementById('pwdb'),{childList:true});}
 })();
